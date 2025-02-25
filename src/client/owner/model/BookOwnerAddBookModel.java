@@ -19,7 +19,7 @@ import java.net.Socket;
 
 
 public class BookOwnerAddBookModel {
-    private static final String RECORDS_FILE = "res/records.xml";
+    private static final String RECORDS_FILE = "res/owner/records.xml";
     BookOwnerModel model;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
