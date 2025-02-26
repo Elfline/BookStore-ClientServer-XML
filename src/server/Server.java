@@ -41,7 +41,6 @@ public class Server {
     private static final String BOOKS_FILE = "res/books.xml";
     private static final String TRANSACTIONS_FILE = "res/transactions.xml";
     private static final String FAVORITE_FILE = "res/favorites.xml";
-    private static final String SALES_FILE = "res/sales.xml";
     private static List<UserUtility> users = new ArrayList<>();
     private static AtomicInteger transactionCounter = new AtomicInteger(1);
     private static ExecutorService executor;
@@ -164,15 +163,19 @@ public class Server {
                                 output.writeObject(users);
                                 break;
                             case "PROCESS_CART":
-                                File cartFile = new File("res/carts.xml");
                                 String username = (String) input.readObject();
-                                input.readObject();
-                                processCart(username, cartFile);
-                                sendBooksToUsers();
+                                String cartXml = (String) input.readObject();
+                                double total = processCart(username, cartXml);
+                                output.writeObject(total);
+                                break;
+                            case "FETCH_BUY_HISTORY":
+                                String loggedUser = (String) input.readObject(); // Read username from client
+                                List<Transaction> userHistory = fetchBuyHistory(loggedUser); // Fetch history
+                                output.writeObject(userHistory); // Send history to client
+                                System.out.println("[Server] Sent buy history for: " + loggedUser);
                                 break;
                             case "FETCH_SALES_REPORT":
-                                File salesFile = new File("res/sales.xml");
-                                sendSalesReport(salesFile);
+                                sendSalesReport(output);
                                 break;
                             case "ADD_BOOK":
                                 BookUtility newBook = (BookUtility) input.readObject();
@@ -180,9 +183,8 @@ public class Server {
                                 boolean success = addBookToXML(newBook);
                                 output.writeObject(success ? "SUCCESS" : "ERROR");
                                 if (success) {
-                                    System.out.println("[Server] Book '" + newBook.getTitle() + "' has been added to books.xml");
+                                    System.out.println("[Server] Book '" + newBook.getTitle() +"' has been added to books.xml");
                                 }
-                                sendBooksToUsers();
                                 break;
                             case "DELETE_BOOK":
                                 String titleToDelete = (String) input.readObject(); // Read the book title
@@ -192,16 +194,14 @@ public class Server {
                                 if (deleted) {
                                     System.out.println("[Server] Book '" + titleToDelete + "' has been successfully deleted to books.xml");
                                 }
-                                sendBooksToUsers();
                                 break;
                             case "UPDATE_BOOK":
                                 BookUtility bookToUpdate = (BookUtility) input.readObject();
                                 boolean updateSuccess = updateBookInXML(bookToUpdate);
                                 output.writeObject(updateSuccess ? "SUCCESS" : "ERROR");
                                 if (updateSuccess) {
-                                    System.out.println("[Server] Book '" + bookToUpdate + "' is successfully updated");
+                                    System.out.println("[Server] Book '" + bookToUpdate +"' is successfully updated");
                                 }
-                                sendBooksToUsers();
                                 break;
                             case "REQUEST_BOOKS":
                                 System.out.println("[SERVER] Client requested book list");
@@ -398,10 +398,16 @@ public class Server {
 
             for (UserUtility user : users) {
                 Element userElement = doc.createElement("user");
-                appendChildElement(doc, userElement, "username", user.getUsername());
-                appendChildElement(doc, userElement ,"password", user.getPassword());
-                appendChildElement(doc, userElement, "accountType", user.getAccountType());
+                Element usernameElement = doc.createElement("username");
+                usernameElement.appendChild(doc.createTextNode(user.getUsername()));
+                Element passwordElement = doc.createElement("password");
+                passwordElement.appendChild(doc.createTextNode(user.getPassword())); // Hash before saving!
+                Element accountTypeElement = doc.createElement("accountType");
+                accountTypeElement.appendChild(doc.createTextNode(user.getAccountType()));
 
+                userElement.appendChild(usernameElement);
+                userElement.appendChild(passwordElement);
+                userElement.appendChild(accountTypeElement);
                 rootElement.appendChild(userElement);
             }
 
@@ -424,10 +430,10 @@ public class Server {
     }
 
     /**
-     * Method to process the cart, getting the inputs in the carts.xml, computing the total amount,
-     * subtracting the stocks to the quantity in carts.xml and writing the transactions.xml and sales.xml after the user's purchased
+     * Method to process the cart, getting the inputs in the cart.xml, computing the total amount,
+     * subtracting the stocks to the quantity in cart.xml and writing the transactions.xml after the user's purchased
      */
-    private static void processCart(String username, File cartXml) throws Exception {
+    private static double processCart(String username, String cartXml) throws Exception {
         System.out.println("[DEBUG] Received cart XML for user: " + username);
 
         // Load book utilities from the BOOKS_FILE
@@ -439,7 +445,6 @@ public class Server {
 
         double total = 0;
         List<Transaction> transactions = new ArrayList<>();
-        List<Sales> sales = new ArrayList<>();
 
         // Process each book in the cart
         for (int i = 0; i < bookNodes.getLength(); i++) {
@@ -466,7 +471,6 @@ public class Server {
                     String currentDate = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
 
                     transactions.add(new Transaction(username, currentDate, transactionId, title, quantity, matchingBook.getPrice(), bookTotal));
-                    sales.add(new Sales(transactionId, currentDate, title, quantity, matchingBook.getPrice(), bookTotal, 0));
                 } else {
                     System.out.println("[Server] Not enough stock for the book: " + title);
                 }
@@ -476,9 +480,8 @@ public class Server {
         }
         saveBooksData(bookUtilities); // Save updated stock
         saveTransactions(transactions);
-        saveSales(sales);
+        return total;
     }
-
 
     /**
      * Generate unique transactionId for every purchased
@@ -507,7 +510,6 @@ public class Server {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             doc = builder.newDocument();
-            saveXMLDocument(doc, TRANSACTIONS_FILE);
             Element root = doc.createElement("transactions");
             doc.appendChild(root);
         }
@@ -531,37 +533,6 @@ public class Server {
         }
 
         saveXmlDocument(doc, file);
-    }
-    private static void saveSales(List<Sales> newSales) throws Exception {
-        File file = new File(SALES_FILE);
-        Document salesXML;
-
-        if (file.exists() && file.length() > 0) {
-            salesXML = parseXml(file);
-        } else {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            salesXML = builder.newDocument();
-            Element root = salesXML.createElement("sales");
-            salesXML.appendChild(root);
-        }
-
-        Element root = salesXML.getDocumentElement();
-
-        for (Sales sales : newSales) {
-            Element transactionElement = salesXML.createElement("transactions");
-
-            appendChildElement(salesXML, transactionElement, "transactionId", sales.getTransactionId());
-            appendChildElement(salesXML, transactionElement, "book", sales.getBookTitle());
-            appendChildElement(salesXML, transactionElement, "quantity", String.valueOf(sales.getQuantity()));
-            appendChildElement(salesXML, transactionElement, "price", String.format("%.2f", sales.getPrice()));
-            appendChildElement(salesXML, transactionElement, "total", String.format("%.2f", sales.getBookTotal()));
-            appendChildElement(salesXML, transactionElement, "revenue", String.format("%.2f", sales.getRevenue()));
-
-            root.appendChild(transactionElement);
-        }
-
-        saveXmlDocument(salesXML, file);
     }
 
     /**
@@ -587,12 +558,29 @@ public class Server {
         for (BookUtility book : books) {
             Element bookElement = doc.createElement("book");
 
-            appendChildElement(doc, bookElement, "Title", book.getTitle());
-            appendChildElement(doc, bookElement, "Author", book.getAuthor());
-            appendChildElement(doc, bookElement, "Genre", book.getAuthor());
-            appendChildElement(doc, bookElement, "Stock", String.valueOf(book.getStock()));
-            appendChildElement(doc, bookElement, "Year", String.valueOf(book.getYear()));
-            appendChildElement(doc, bookElement, "Price", String.valueOf(book.getPrice()));
+            Element title = doc.createElement("Title");
+            title.appendChild(doc.createTextNode(book.getTitle()));
+            bookElement.appendChild(title);
+
+            Element author = doc.createElement("Author");
+            author.appendChild(doc.createTextNode(book.getAuthor()));
+            bookElement.appendChild(author);
+
+            Element genre = doc.createElement("Genre");
+            genre.appendChild(doc.createTextNode(book.getGenre()));
+            bookElement.appendChild(genre);
+
+            Element stock = doc.createElement("Stock");
+            stock.appendChild(doc.createTextNode(String.valueOf(book.getStock())));
+            bookElement.appendChild(stock);
+
+            Element year = doc.createElement("Year");
+            year.appendChild(doc.createTextNode(book.getYear()));
+            bookElement.appendChild(year);
+
+            Element price = doc.createElement("Price");
+            price.appendChild(doc.createTextNode(String.valueOf(book.getPrice())));
+            bookElement.appendChild(price);
 
             rootElement.appendChild(bookElement);
         }
@@ -636,6 +624,12 @@ public class Server {
         return null;  // Return null if book is not found
     }
 
+    private static Document parseXml(String xml) throws Exception {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        return builder.parse(new ByteArrayInputStream(xml.getBytes()));
+    }
+
     private static Document parseXml(File file) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -651,6 +645,23 @@ public class Server {
         transformer.transform(source, result);
     }
 
+
+    /**
+     * Fetch the buy history for a specific client (username) from transactions.xml
+     */
+    private static List<Transaction> fetchBuyHistory(String username) {
+        List<Transaction> allTransactions = loadTransactions();
+        List<Transaction> userTransactions = new ArrayList<>();
+
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getUsername().equalsIgnoreCase(username)) {
+                userTransactions.add(transaction);
+            }
+        }
+
+        return userTransactions;
+    }
+
     /** method to deserialize the transaction.xml */
     private static List<Transaction> loadTransactions() {
         try {
@@ -660,20 +671,9 @@ public class Server {
             return new ArrayList<>();
         }
     }
-    private static List<Sales> loadSales() {
-        try {
-            return XMLUtils.readSalesFromXML(SALES_FILE); // Using the existing utility method
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
     /** Fetches all the transactions, computes total sales and revenue per month, then send it to the BookOwnerSalesReportModel */
-    private static File sendSalesReport(File salesXML) throws IOException {
-        salesXML = new File("res/sales.xml");
-
+    private static void sendSalesReport(ObjectOutputStream outputStream) throws IOException {
         List<Transaction> transactions = loadTransactions();
-        List<Sales> sales = loadSales();
         Map<String, Double> revenueByMonth = new HashMap<>();
 
         for (Transaction transaction : transactions) {
@@ -683,9 +683,10 @@ public class Server {
             revenueByMonth.put(month, revenueByMonth.getOrDefault(month, 0.0) + totalSales);
         }
 
-        sales.add(new Sales(transactionId, date, title, quantity, matchingBook.getPrice(), bookTotal, revenueByMonth));
+        // Send transactions and computed revenue per month
+        outputStream.writeObject(transactions);
+        outputStream.writeObject(revenueByMonth);
         System.out.println("[Server] Sales Report successfully sent to client ");
-        return salesXML;
     }
 
     /** Method for adding the book received from the BookOwnerAddBookModel */
@@ -758,7 +759,7 @@ public class Server {
         }
 
         try {
-            ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream(BOOKS_FILE));
+            String booksXMLContent = new String(Files.readAllBytes(booksFile.toPath()), StandardCharsets.UTF_8);
 
             for (Map.Entry<String, Socket> entry : loggedInBookOwners.entrySet()) {
                 try {
@@ -766,8 +767,8 @@ public class Server {
                     ObjectOutputStream output = new ObjectOutputStream(clientSocket.getOutputStream());
 
                     output.writeObject("UPDATE_BOOKS"); // Send command
-                    output.writeObject(fileReader); // Send XML data
-                    System.out.println("[DEBUG] Server sending books.xml content:\n" + fileReader);
+                    output.writeObject(booksXMLContent); // Send XML data
+                    System.out.println("[DEBUG] Server sending books.xml content:\n" + booksXMLContent);
                     output.flush();
 
                     System.out.println("[SERVER] Sent books.xml to user: " + entry.getKey());

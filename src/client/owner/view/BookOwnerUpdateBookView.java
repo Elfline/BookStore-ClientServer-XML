@@ -1,6 +1,6 @@
-package client.owner.view;
+package client.bookowner.view;
 
-import client.owner.model.BookOwnerUpdateBookModel;
+import client.bookowner.model.BookOwnerUpdateBookModel;
 
 import javax.swing.*;
 import java.awt.*;

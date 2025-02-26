@@ -1,6 +1,6 @@
-package client.owner.model;
+package client.bookowner.model;
 
-import utilities.Book;
+import utilities.BookUtility;
 import utilities.XMLUtils;
 
 import java.io.*;
@@ -11,18 +11,16 @@ import java.util.List;
 public class BookOwnerModel {
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 2000;
-    private List<Book> books;
-    private Book selectedBook;
+    private List<BookUtility> books;
+    private BookUtility selectedBook;
     private Runnable updateCallback; // This will notify the GUI when books are updated
     private static final String BOOKS_FILE = "res/books.xml";
-
 
     public BookOwnerModel() {
         System.out.println("[CLIENT] Requesting the books data from server...");
         this.books = XMLUtils.readBooksFromXML(BOOKS_FILE);
         requestBooksFromServer();
     }
-
     public void setUpdateCallback(Runnable callback) {
         this.updateCallback = callback;
     }

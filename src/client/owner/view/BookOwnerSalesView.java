@@ -1,3 +1,17 @@
+/**
+ Algorithm for the BookOwnerSalesReportView class:
+ 1. Initialize variables for:
+ - Creating a sales table
+ - Creating a refresh button
+ - Displaying the calculated total revenue
+ 2. Create a constructor class which does the following:
+ - Set the window title and size
+ - Set the window layout
+ - Initializes and creates the table, refresh button, and total revenue
+ - Set the default close operation
+ 3. Create a method to show the sales data in the table and has a summary row
+ for the total revenue.
+ */
 
 package client.owner.view;
 

@@ -1,14 +1,6 @@
-/**
- * Algorithm: Server Connection
- * 1. Establish a connection with the server using a socket.
- * 2. Implement methods for fetching users, saving users, validating users, and processing transactions.
- * 3. Use input and output streams to send and receive data.
- * 4. Ensure connection persistence where needed.
- * 5. Handle exceptions properly to maintain stability.
- */
 package server;
 
-import utilities.UserUtility;
+import utilities.User;
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
@@ -19,7 +11,7 @@ public class ServerConnection {
 
 
     /** Fetch users */
-    public static List<UserUtility> fetchUsers() {
+    public static List<User> fetchUsers() {
         try (Socket socket = new Socket(SERVER_ADDRESS, PORT);
              ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream input = new ObjectInputStream(socket.getInputStream())) {

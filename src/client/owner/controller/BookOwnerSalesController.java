@@ -1,8 +1,14 @@
+/**
+ Algorithm for the BookOwnerSalesReportController class:
+ 1. Initialize variables for the model and view class.
+ 2. Create constructor class for said variables.
+ 3. Create a method to refresh and show the latest sales report
+ */
 
-package client.owner.controller;
+package client.bookowner.controller;
 
-import client.owner.model.BookOwnerSalesModel;
-import client.owner.view.BookOwnerSalesView;
+import client.bookowner.model.BookOwnerSalesReportModel;
+import client.bookowner.view.BookOwnerSalesReportView;
 import utilities.Transaction;
 import utilities.XMLUtils;
 
@@ -18,10 +24,10 @@ import java.util.Map;
 public class BookOwnerSalesController {
     private BookOwnerSalesModel model;
     private BookOwnerSalesView view;
-    private BookOwnerController mainController;
+    private client.bookowner.controller.BookOwnerController mainController;
 
 
-    public BookOwnerSalesController(BookOwnerSalesView view, BookOwnerSalesModel model, BookOwnerController mainController) {
+    public BookOwnerSalesController(BookOwnerSalesView view, BookOwnerSalesModel model, client.bookowner.controller.BookOwnerController mainController) {
         this.model = model;
         this.view = view;
         this.mainController = mainController;

@@ -1,4 +1,5 @@
-package client.owner.view;
+package client.bookowner.view;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -60,5 +61,4 @@ public class BookOwnerView extends JFrame {
         logOutButton.addActionListener(listener);
     }
     public void setUpdateButton(ActionListener listener) { updateButton.addActionListener(listener);}
-
 }

@@ -1,9 +1,9 @@
-package client.owner.controller;
+package client.bookowner.controller;
 
-import client.owner.model.BookOwnerLoginModel;
-import client.owner.view.BookOwnerLoginView;
+import client.bookowner.model.BookOwnerLoginModel;
+import client.bookowner.view.BookOwnerLoginView;
 import server.ServerConnection;
-import utilities.User;
+import utilities.UserUtility;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,10 +24,10 @@ public class BookOwnerLoginController {
     }
 
     private void syncBookOwnerFromServer() {
-        List<User> serverBookOwner = ServerConnection.fetchUsers();
+        List<UserUtility> serverBookOwner = ServerConnection.fetchUsers();
 
         if (serverBookOwner != null) { // Check for null before iterating
-            for (User bookowner : serverBookOwner) {
+            for (UserUtility bookowner : serverBookOwner) {
                 if (!model.bookOwnerExists(bookowner.getUsername())) {
                     model.addBookOwner(bookowner); // Add to the model (you'll need to implement this)
                     System.out.println("[BookOwnerLoginController] Book owner synced from server: " + bookowner.getUsername());

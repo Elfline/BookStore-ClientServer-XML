@@ -1,4 +1,4 @@
-package client.owner.view;
+package client.bookowner.view;
 
 import javax.swing.*;
 import java.awt.*;

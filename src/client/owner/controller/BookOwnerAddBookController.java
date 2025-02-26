@@ -1,7 +1,7 @@
-package client.owner.controller;
+package client.bookowner.controller;
 
-import client.owner.model.BookOwnerAddBookModel;
-import client.owner.view.BookOwnerAddBookView;
+import client.bookowner.model.BookOwnerAddBookModel;
+import client.bookowner.view.BookOwnerAddBookView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +42,7 @@ public class BookOwnerAddBookController {
 
                 if (success) {
                     JOptionPane.showMessageDialog(view, "Book added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    mainController.updateBookTable();
+                    mainController.updateBookTable(mainController.getView().getTableModel());
                     view.dispose();
                 } else {
                     JOptionPane.showMessageDialog(view, "Failed to add book. Try again.", "Error", JOptionPane.ERROR_MESSAGE);

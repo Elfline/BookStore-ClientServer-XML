@@ -1,3 +1,4 @@
+package client.owner;
 import client.owner.controller.*;
 import client.owner.model.*;
 import client.owner.view.*;
@@ -8,9 +9,9 @@ public class BookOwnerApplication {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() ->{
             //initialize the BookOwner view, model, and controller
-            BookOwnerLoginModel model = new BookOwnerLoginModel();
-            BookOwnerLoginView view = new BookOwnerLoginView();
-            BookOwnerLoginController controller = new BookOwnerLoginController(model, view);
+            client.bookowner.model.BookOwnerLoginModel model = new client.bookowner.model.BookOwnerLoginModel();
+            client.bookowner.view.BookOwnerLoginView view = new client.bookowner.view.BookOwnerLoginView();
+            client.bookowner.controller.BookOwnerLoginController controller = new client.bookowner.controller.BookOwnerLoginController(model, view);
 
             //show the login window
             view.setVisible(true);
@@ -31,9 +32,9 @@ public class BookOwnerApplication {
                     //redirect based on account type
                     if("Book Owner".equalsIgnoreCase(accountType)) {
                         // Initialize the "BookOwner" view, model, and controller
-                        BookOwnerModel bookOwnerModel = new BookOwnerModel();
-                        BookOwnerView bookOwnerView = new BookOwnerView(username);
-                        BookOwnerController bookOwnerController = new BookOwnerController(bookOwnerView, bookOwnerModel, model);
+                        client.bookowner.model.BookOwnerModel bookOwnerModel = new client.bookowner.model.BookOwnerModel();
+                        client.bookowner.view.BookOwnerView bookOwnerView = new client.bookowner.view.BookOwnerView(username);
+                        client.bookowner.controller.BookOwnerController bookOwnerController = new client.bookowner.controller.BookOwnerController(bookOwnerView, bookOwnerModel, model);
 
                         // Set the "Log Out" button action to return to the login panel
                         bookOwnerView.setLogOutButton(e1 -> {
@@ -46,17 +47,17 @@ public class BookOwnerApplication {
 
                         view.setVisible(false);
                         // Initialize the "Add Book" view, model, and controller
-                        BookOwnerAddBookView addBookView = new BookOwnerAddBookView();
-                        BookOwnerAddBookModel addBookModel = new BookOwnerAddBookModel(bookOwnerModel);
-                        new BookOwnerAddBookController(addBookView, addBookModel, bookOwnerController);
+                        client.bookowner.view.BookOwnerAddBookView addBookView = new client.bookowner.view.BookOwnerAddBookView();
+                        client.bookowner.model.BookOwnerAddBookModel addBookModel = new client.bookowner.model.BookOwnerAddBookModel(bookOwnerModel);
+                        new client.bookowner.controller.BookOwnerAddBookController(addBookView, addBookModel, bookOwnerController);
 
                         // Set the "Add Book" button action
                         bookOwnerView.setAddButtonListener(f -> addBookView.setVisible(true));
 
                         // Initialize the "Sales Report" view, model, and controller
-                        BookOwnerSalesView salesReportView = new BookOwnerSalesReportView();
-                        BookOwnerSalesModel salesReportModel = new BookOwnerSalesReportModel(bookOwnerModel);
-                        new BookOwnerSalesController(salesReportView, salesReportModel, bookOwnerController);
+                        BookOwnerSalesReportView salesReportView = new BookOwnerSalesReportView();
+                        BookOwnerSalesReportModel salesReportModel = new BookOwnerSalesReportModel(bookOwnerModel);
+                        new BookOwnerSalesReportController(salesReportView, salesReportModel, bookOwnerController);
 
                         // Set the "Show Sales" button action
                         bookOwnerView.setSalesButtonListener(f -> salesReportView.setVisible(true));
@@ -71,9 +72,9 @@ public class BookOwnerApplication {
                             }
 
                             String selectedBookTitle = bookOwnerModel.getSelectedBook().getTitle();
-                            BookOwnerDeleteBookView deleteBookView = new BookOwnerDeleteBookView(selectedBookTitle);
-                            BookOwnerDeleteBookModel deleteBookModel = new BookOwnerDeleteBookModel(bookOwnerModel);
-                            new BookOwnerDeleteBookController(deleteBookView, deleteBookModel, bookOwnerController);
+                            client.bookowner.view.BookOwnerDeleteBookView deleteBookView = new client.bookowner.view.BookOwnerDeleteBookView(selectedBookTitle);
+                            client.bookowner.model.BookOwnerDeleteBookModel deleteBookModel = new client.bookowner.model.BookOwnerDeleteBookModel(bookOwnerModel);
+                            new client.bookowner.controller.BookOwnerDeleteBookController(deleteBookView, deleteBookModel, bookOwnerController);
 
                             deleteBookView.setVisible(true);
                         });
@@ -85,9 +86,9 @@ public class BookOwnerApplication {
                                 return;
                             }
 
-                            BookOwnerUpdateBookModel updateBookModel = new BookOwnerUpdateBookModel(bookOwnerModel);
-                            BookOwnerUpdateBookView updateBookView = new BookOwnerUpdateBookView(updateBookModel);
-                            new BookOwnerUpdateBookController(updateBookView, updateBookModel, bookOwnerController);
+                            client.bookowner.model.BookOwnerUpdateBookModel updateBookModel = new client.bookowner.model.BookOwnerUpdateBookModel(bookOwnerModel);
+                            client.bookowner.view.BookOwnerUpdateBookView updateBookView = new client.bookowner.view.BookOwnerUpdateBookView(updateBookModel);
+                            new client.bookowner.controller.BookOwnerUpdateBookController(updateBookView, updateBookModel, bookOwnerController);
 
                             updateBookView.setVisible(true);
                         });

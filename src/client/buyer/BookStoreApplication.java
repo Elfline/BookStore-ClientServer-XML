@@ -1,5 +1,5 @@
+package client.buyer;
 import client.buyer.controller.*;
-import client.buyer.controller.BookStoreController;
 import client.buyer.model.*;
 import client.buyer.view.*;
 

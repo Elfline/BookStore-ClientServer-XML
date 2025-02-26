@@ -1,4 +1,12 @@
-package client.owner.model;
+/**
+ Algorithm for the BookOwnerSalesReportModel class:
+ 1. Initialize variables to store the transaction and total revenue.
+ 2. Create a constructor method for an empty transaction list.
+ 3. Create a setter and getter method for the transactions.
+ 4. Create a method to get the total revenue by calculating the sum of the total amounts.
+ */
+
+package client.bookowner.model;
 
 import utilities.Transaction;
 
@@ -13,14 +21,14 @@ import java.util.Map;
 
 public class BookOwnerSalesModel {
     private List<Transaction> transactions;
-    BookOwnerModel model;
+    client.bookowner.model.BookOwnerModel model;
     private Socket socket;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
     private Map<String, Double> revenueByMonth = new HashMap<>();
 
 
-    public BookOwnerSalesModel(BookOwnerModel model) {
+    public BookOwnerSalesModel(client.bookowner.model.BookOwnerModel model) {
         transactions = new ArrayList<>();
         this.model = model;
         initializeConnection();

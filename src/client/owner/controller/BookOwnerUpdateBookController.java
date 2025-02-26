@@ -1,16 +1,16 @@
-package client.owner.controller;
+package client.bookowner.controller;
 
-import client.owner.model.BookOwnerUpdateBookModel;
-import client.owner.view.BookOwnerUpdateBookView;
+import client.bookowner.model.BookOwnerUpdateBookModel;
+import client.bookowner.view.BookOwnerUpdateBookView;
 
 import javax.swing.*;
 
 public class BookOwnerUpdateBookController {
     private BookOwnerUpdateBookView view;
     private BookOwnerUpdateBookModel model;
-    private BookOwnerController mainController;
+    private client.bookowner.controller.BookOwnerController mainController;
 
-    public BookOwnerUpdateBookController(BookOwnerUpdateBookView view, BookOwnerUpdateBookModel model, BookOwnerController mainController) {
+    public BookOwnerUpdateBookController(BookOwnerUpdateBookView view, BookOwnerUpdateBookModel model, client.bookowner.controller.BookOwnerController mainController) {
         this.view = view;
         this.model = model;
         this.mainController = mainController;
@@ -41,7 +41,7 @@ public class BookOwnerUpdateBookController {
 
             if (success) {
                 JOptionPane.showMessageDialog(view, "Book updated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                mainController.updateBookTable();
+                mainController.updateBookTable(mainController.getView().getTableModel());
                 view.dispose();
             } else {
                 JOptionPane.showMessageDialog(view, "Failed to update book. Try again.", "Error", JOptionPane.ERROR_MESSAGE);
