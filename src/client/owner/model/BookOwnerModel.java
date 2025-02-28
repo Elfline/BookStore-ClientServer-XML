@@ -1,7 +1,7 @@
-package client.bookowner.model;
+package client.owner.model;
 
-import utilities.BookUtility;
-import utilities.XMLUtils;
+import utilities.Book;
+import server.XMLUtils;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,8 +11,8 @@ import java.util.List;
 public class BookOwnerModel {
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 2000;
-    private List<BookUtility> books;
-    private BookUtility selectedBook;
+    private List<Book> books;
+    private Book selectedBook;
     private Runnable updateCallback; // This will notify the GUI when books are updated
     private static final String BOOKS_FILE = "res/books.xml";
 

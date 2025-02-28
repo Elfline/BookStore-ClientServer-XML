@@ -1,3 +1,32 @@
 <sales>
+    <year>2024
 
+        <month>01
+            <day>21
+                <transactionId></transactionId>
+            </day>
+            <day>22
+                <transactionId></transactionId>
+            </day>
+        </month>
+
+        <month>02
+            <day>13
+                <transactionId></transactionId>
+            </day>
+            <day>14
+                <transactionId></transactionId>
+            </day>
+        </month>
+
+    </year>
+    <year>2025
+
+        <month>02
+            <day>
+                <transactionId></transactionId>
+            </day>
+        </month>
+
+    </year>
 </sales>

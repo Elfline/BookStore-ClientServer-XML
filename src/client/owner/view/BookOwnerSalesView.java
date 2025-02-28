@@ -1,33 +1,18 @@
-/**
- Algorithm for the BookOwnerSalesReportView class:
- 1. Initialize variables for:
- - Creating a sales table
- - Creating a refresh button
- - Displaying the calculated total revenue
- 2. Create a constructor class which does the following:
- - Set the window title and size
- - Set the window layout
- - Initializes and creates the table, refresh button, and total revenue
- - Set the default close operation
- 3. Create a method to show the sales data in the table and has a summary row
- for the total revenue.
- */
-
 package client.owner.view;
 
 import utilities.Transaction;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 public class BookOwnerSalesView extends JFrame {
     private JTable salesTable;
     private JButton refreshButton;
     private JLabel totalRevenueLabel;
+    private JComboBox<String> monthFilter;
+    private JComboBox<String> yearFilter;
 
     public BookOwnerSalesView() {
         setTitle("Sales Report");
@@ -39,56 +24,42 @@ public class BookOwnerSalesView extends JFrame {
         refreshButton = new JButton("Refresh");
         totalRevenueLabel = new JLabel("Total Revenue: 0.00");
 
+        String[] months = {"All", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+        String[] years = {"All", "2022", "2023", "2024", "2025"};
+
+        monthFilter = new JComboBox<>(months);
+        yearFilter = new JComboBox<>(years);
+
+        JPanel filterPanel = new JPanel();
+        filterPanel.add(new JLabel("Month:"));
+        filterPanel.add(monthFilter);
+        filterPanel.add(new JLabel("Year:"));
+        filterPanel.add(yearFilter);
+
+        add(filterPanel, BorderLayout.NORTH);
         add(new JScrollPane(salesTable), BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(totalRevenueLabel, BorderLayout.SOUTH);
-        bottomPanel.add(refreshButton, BorderLayout.SOUTH);
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.add(totalRevenueLabel);
+        bottomPanel.add(refreshButton);
         add(bottomPanel, BorderLayout.SOUTH);
     }
     public JButton getRefreshButton() {
         return refreshButton;
     }
 
+    public JComboBox<String> getMonthFilter() {
+        return monthFilter;
+    }
+
+    public JComboBox<String> getYearFilter() {
+        return yearFilter;
+    }
+
     public void showSalesData(List<Transaction> transactions, Map<String, Double> revenueByMonth) {
         String[] columnHeader = {"Date", "Transaction ID", "Book Title", "Quantity", "Price", "Total Sales"};
         DefaultTableModel tableModel = new DefaultTableModel(columnHeader, 0);
 
-        String currentMonth = "";
-        double monthTotal = 0.0;
-
-        for (Transaction transaction : transactions) {
-            String month = transaction.getDate().substring(0, 7); // Extract "MM-yyyy"
-
-            if (!currentMonth.equals(month) && !currentMonth.isEmpty()) {
-                // Add summary row for the previous month
-                tableModel.addRow(new Object[]{"", "", "", "", "TOTAL REVENUE:", monthTotal});
-                monthTotal = 0.0;
-            }
-
-            double totalSales = transaction.getQuantity() * transaction.getPrice();
-            monthTotal += totalSales;
-
-            tableModel.addRow(new Object[]{
-                    transaction.getDate(),
-                    transaction.getTransactionId(),
-                    transaction.getBookTitle(),
-                    transaction.getQuantity(),
-                    transaction.getPrice(),
-                    totalSales
-            });
-
-            currentMonth = month;
-        }
-
-        // Add final month's summary row
-        if (!currentMonth.isEmpty()) {
-            tableModel.addRow(new Object[]{"", "", "", "", "TOTAL REVENUE:", monthTotal});
-        }
-
-        salesTable.setModel(tableModel);
-
-        double totalRevenue = revenueByMonth.values().stream().mapToDouble(Double::doubleValue).sum();
-        totalRevenueLabel.setText("Total Revenue: " + totalRevenue);
     }
 }

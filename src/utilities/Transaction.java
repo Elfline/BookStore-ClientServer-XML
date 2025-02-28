@@ -1,15 +1,7 @@
-/*
-Algorithm for the Transaction class:
-* A constructor class for recording transactions.
-1. Initialize variables: username, date, transactionId, bookTitle, quantity, price, totalAmount
-2. Add getters and setters for the variables.
- */
-
 package utilities;
 
-import java.io.Serializable;
 
-public class Transaction implements Serializable {
+public class Transaction {
     private String username;
     private String date;
     private String transactionId;

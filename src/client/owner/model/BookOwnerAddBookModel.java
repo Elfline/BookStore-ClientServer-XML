@@ -1,8 +1,6 @@
+package client.owner.model;
 
-
-package client.bookowner.model;
-
-import utilities.BookUtility;
+import utilities.Book;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -33,7 +31,7 @@ public class BookOwnerAddBookModel {
     public boolean addBook(String title, String author, String genre, String year, int stock, double price) {
         try {
             // Create a new book object
-            BookUtility newBook = new BookUtility(title, author, genre, stock, year, price);
+            Book newBook = new Book(title, author, genre, stock, year, price);
 
             // Send request to server
             outputStream.writeObject("ADD_BOOK");

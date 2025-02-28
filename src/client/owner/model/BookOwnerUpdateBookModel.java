@@ -1,7 +1,6 @@
-package client.bookowner.model;
+package client.owner.model;
 
-import utilities.BookUtility;
-import utilities.XMLUtils;
+import utilities.Book;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,8 +14,8 @@ public class BookOwnerUpdateBookModel {
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
     private Socket socket;
-    private BookUtility bookToUpdate;
-    private List<BookUtility> books = new ArrayList<>();
+    private Book bookToUpdate;
+    private List<Book> books = new ArrayList<>();
 
     public BookOwnerUpdateBookModel(client.bookowner.model.BookOwnerModel model) {
         this.model = model;

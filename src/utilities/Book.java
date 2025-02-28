@@ -1,8 +1,6 @@
 package utilities;
 
-import java.io.*;
-
-public class Book implements Serializable {
+public class Book {
     String title;
     String author;
     String genre;
@@ -54,24 +52,4 @@ public class Book implements Serializable {
         this.price = price;
     }
 
-    public static <T> void serialize(T object, String filePath) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            out.writeObject(object);
-            System.out.println("[Serialization] Object serialized to: " + filePath);
-        } catch (IOException e) {
-            System.err.println("[Serialization] Error serializing object: " + e.getMessage());
-        }
-    }
-
-    // Generic deserialization method
-    public static <T> T deserialize(String filePath) {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
-            T object = (T) in.readObject();
-            System.out.println("[Deserialization] Object deserialized from: " + filePath);
-            return object;
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("[Deserialization] Error deserializing object: " + e.getMessage());
-            return null;
-        }
-    }
 }

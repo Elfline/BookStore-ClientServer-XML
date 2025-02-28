@@ -16,7 +16,7 @@
 package client.buyer.model;
 
 import utilities.Book;
-import utilities.XMLUtils;
+import server.XMLUtils;
 import utilities.User;
 import java.util.List;
 

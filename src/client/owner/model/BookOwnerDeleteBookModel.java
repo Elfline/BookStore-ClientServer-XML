@@ -1,4 +1,4 @@
-package client.bookowner.model;
+package client.owner.model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

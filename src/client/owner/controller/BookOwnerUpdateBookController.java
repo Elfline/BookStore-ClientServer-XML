@@ -1,14 +1,14 @@
-package client.bookowner.controller;
+package client.owner.controller;
 
-import client.bookowner.model.BookOwnerUpdateBookModel;
-import client.bookowner.view.BookOwnerUpdateBookView;
+import client.owner.model.BookOwnerUpdateBookModel;
+import client.owner.view.BookOwnerUpdateBookView;
 
 import javax.swing.*;
 
 public class BookOwnerUpdateBookController {
-    private BookOwnerUpdateBookView view;
-    private BookOwnerUpdateBookModel model;
-    private client.bookowner.controller.BookOwnerController mainController;
+    BookOwnerUpdateBookView view;
+    BookOwnerUpdateBookModel model;
+    BookOwnerController mainController;
 
     public BookOwnerUpdateBookController(BookOwnerUpdateBookView view, BookOwnerUpdateBookModel model, client.bookowner.controller.BookOwnerController mainController) {
         this.view = view;

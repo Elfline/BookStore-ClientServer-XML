@@ -1,4 +1,4 @@
-package client.bookowner.view;
+package client.owner.view;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

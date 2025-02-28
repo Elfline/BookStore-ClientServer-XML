@@ -1,14 +1,10 @@
 package utilities;
 
-import java.io.*;
-
-public class User implements Serializable {
+public class User {
     private String username;
     private String password;
     private String accountType;
-
-    // Static variable to store the logged-in username
-    private static String loggedInUsername;
+    private static String loggedInUsername;  // Static variable to store the logged-in username
 
     private static final ThreadLocal<String> loggedInUser = new ThreadLocal<>(); //added for threads compatibility, pacomment out na lang pag ayaw
 
@@ -40,27 +36,5 @@ public class User implements Serializable {
     public static void clearLoggedInUsername() {
         loggedInUser.remove();
     }
-    // Generic serialization method
-    public static <T> void serialize(T object, String filePath) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            out.writeObject(object);
-            System.out.println("[Serialization] Object serialized to: " + filePath);
-        } catch (IOException e) {
-            System.err.println("[Serialization] Error serializing object: " + e.getMessage());
-        }
-    }
-
-    // Generic deserialization method
-    public static <T> T deserialize(String filePath) {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
-            T object = (T) in.readObject();
-            System.out.println("[Deserialization] Object deserialized from: " + filePath);
-            return object;
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("[Deserialization] Error deserializing object: " + e.getMessage());
-            return null;
-        }
-    }
-
 
 }

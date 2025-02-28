@@ -1,12 +1,4 @@
-/**
- Algorithm for the BookOwnerSalesReportModel class:
- 1. Initialize variables to store the transaction and total revenue.
- 2. Create a constructor method for an empty transaction list.
- 3. Create a setter and getter method for the transactions.
- 4. Create a method to get the total revenue by calculating the sum of the total amounts.
- */
-
-package client.bookowner.model;
+package client.owner.model;
 
 import utilities.Transaction;
 
@@ -21,10 +13,9 @@ import java.util.Map;
 
 public class BookOwnerSalesModel {
     private List<Transaction> transactions;
-    client.bookowner.model.BookOwnerModel model;
-    private Socket socket;
-    private ObjectOutputStream outputStream;
-    private ObjectInputStream inputStream;
+    BookOwnerModel model;
+    private static final String SERVER_HOST = "localhost";
+    private static final int SERVER_PORT = 2000;
     private Map<String, Double> revenueByMonth = new HashMap<>();
 
 
@@ -36,18 +27,32 @@ public class BookOwnerSalesModel {
 
     private void initializeConnection() {
         try {
-            socket = new Socket("localhost", 2000);
-            outputStream = new ObjectOutputStream(socket.getOutputStream());
-            inputStream = new ObjectInputStream(socket.getInputStream());
+            Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
+            ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void fetchTransactions() {
         try {
+            if (socket == null || socket.isClosed()) {
+                initializeConnection();
+            }
+
             outputStream.writeObject("FETCH_SALES_REPORT");
-            transactions = (List<Transaction>) inputStream.readObject();
-            revenueByMonth = (Map<String, Double>) inputStream.readObject(); // Receive revenue data
+            outputStream.flush();
+
+            Object response = inputStream.readObject();
+            if (response instanceof List) {
+                transactions = (List<Transaction>) response;
+            }
+
+            Object revenueData = inputStream.readObject();
+            if (revenueData instanceof Map) {
+                revenueByMonth = (Map<String, Double>) revenueData;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

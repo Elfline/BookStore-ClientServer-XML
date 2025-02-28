@@ -1,9 +1,9 @@
-package client.bookowner.controller;
+package client.owner.controller;
 
-import client.bookowner.model.BookOwnerLoginModel;
-import client.bookowner.view.BookOwnerLoginView;
+import client.owner.model.BookOwnerLoginModel;
+import client.owner.view.BookOwnerLoginView;
 import server.ServerConnection;
-import utilities.UserUtility;
+import utilities.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +24,7 @@ public class BookOwnerLoginController {
     }
 
     private void syncBookOwnerFromServer() {
-        List<UserUtility> serverBookOwner = ServerConnection.fetchUsers();
+        List<User> serverBookOwner = ServerConnection.fetchUsers();
 
         if (serverBookOwner != null) { // Check for null before iterating
             for (UserUtility bookowner : serverBookOwner) {

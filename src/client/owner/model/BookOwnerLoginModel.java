@@ -1,10 +1,10 @@
-package client.bookowner.model;
+package client.owner.model;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import server.ServerConnection;
-import utilities.UserUtility;
+import utilities.User;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookOwnerLoginModel {
-    private List<UserUtility> bookowner;
+    private List<User> bookowner;
     private static final String FILE = "res/accounts.xml";
     private static final String SERVER_ADDRESS = "localhost";
     private static final  int PORT = 2000;

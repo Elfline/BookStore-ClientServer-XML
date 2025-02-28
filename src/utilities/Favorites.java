@@ -1,8 +1,6 @@
 package utilities;
 
-import java.io.Serializable;
-
-public class Favorites implements Serializable {
+public class Favorites {
     private String user;
     private String title;
     private String author;

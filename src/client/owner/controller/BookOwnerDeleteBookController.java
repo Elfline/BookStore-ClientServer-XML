@@ -1,7 +1,7 @@
-package client.bookowner.controller;
+package client.owner.controller;
 
-import client.bookowner.model.BookOwnerDeleteBookModel;
-import client.bookowner.view.BookOwnerDeleteBookView;
+import client.owner.model.BookOwnerDeleteBookModel;
+import client.owner.view.BookOwnerDeleteBookView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class BookOwnerDeleteBookController {
     BookOwnerDeleteBookView view;
     BookOwnerDeleteBookModel model;
-    client.bookowner.controller.BookOwnerController mainController;
+    BookOwnerController mainController;
 
     public BookOwnerDeleteBookController (BookOwnerDeleteBookView view, BookOwnerDeleteBookModel model, client.bookowner.controller.BookOwnerController mainController) {
         this.model = model;
