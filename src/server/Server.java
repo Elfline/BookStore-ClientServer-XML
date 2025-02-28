@@ -156,21 +156,22 @@ public class Server {
                                 }
                                 break;
                             case "DELETE_BOOK":
-                                File deleteBook = (File) input.readObject(); // Read the book title
+                                File deleteBook = (File) input.readObject();
                                 Book deleteBooks = (Book) ServerXml.loadBooks(deleteBook);
-                                System.out.println("[CLIENT] Sending book for deletion: " + deleteBooks.getTitle);
-                                boolean deleted = deleteBookFromXML(deleteBooks); // Call the updated delete method
-                                output.writeObject(deleted ? "SUCCESS" : "ERROR"); // Send response
+                                System.out.println("[CLIENT] Sending book for deletion: " + deleteBooks.getTitle());
+                                boolean deleted = deleteBookFromXML(deleteBooks);
+                                output.writeObject(deleted ? "SUCCESS" : "ERROR");
                                 if (deleted) {
                                     System.out.println("[SERVER] Book '" + deleteBooks + "' has been successfully deleted to books.xml");
                                 }
                                 break;
                             case "UPDATE_BOOK":
-                                File bookToUpdate = (File) input.readObject();
-                                boolean updateSuccess = updateBookInXML(bookToUpdate);
+                                File updateBook = (File) input.readObject();
+                                Book updateBooks = (Book) ServerXml.loadBooks(updateBook);
+                                boolean updateSuccess = updateBookInXML(updateBooks);
                                 output.writeObject(updateSuccess ? "SUCCESS" : "ERROR");
                                 if (updateSuccess) {
-                                    System.out.println("[Server] Book '" + bookToUpdate +"' is successfully updated");
+                                    System.out.println("[Server] Book '" + updateBooks.getTitle() +"' is successfully updated");
                                 }
                                 break;
                             case "REQUEST_BOOKS":
@@ -306,12 +307,9 @@ public class Server {
     private static boolean deleteBookFromXML(Book book) {
         try {
             List<Book> books = ServerXml.loadBooks(new File(BOOKS_FILE));
-            boolean removed = books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
-
-            if (removed) {
-                ServerXml.saveBooks(books, new File(BOOKS_FILE));
-            }
-            return removed;
+            books.add(book);
+            ServerXml.saveBooks(books, new File(BOOKS_FILE));
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
