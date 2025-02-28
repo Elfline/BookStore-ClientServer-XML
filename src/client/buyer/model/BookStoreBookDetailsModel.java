@@ -16,7 +16,7 @@
 package client.buyer.model;
 
 import utilities.Book;
-import server.XMLUtils;
+import server.ServerXml;
 import utilities.User;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class BookStoreBookDetailsModel {
     private static String LOGGED_IN_USER = User.getLoggedInUsername();
 
     public BookStoreBookDetailsModel() {
-        this.books = XMLUtils.readBooksFromXML(BOOKS_FILE);
+        this.books = ServerXml.readBooksFromXML(BOOKS_FILE);
     }
 
 

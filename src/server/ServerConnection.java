@@ -1,8 +1,6 @@
 package server;
 
 import utilities.User;
-import java.io.*;
-import java.net.Socket;
 import java.util.List;
 
 public class ServerConnection {
@@ -10,32 +8,20 @@ public class ServerConnection {
     private static final int PORT = 2000;
 
 
+
     /** Fetch users */
     public static List<User> fetchUsers() {
-        try (Socket socket = new Socket(SERVER_ADDRESS, PORT);
-             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream input = new ObjectInputStream(socket.getInputStream())) {
-
-            output.writeObject("FETCH_USERS");
-            return (List<UserUtility>) input.readObject();
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return ServerXml.loadUsersFromXML();
     }
 
-    /** Save user */
-    public static boolean saveUser(UserUtility user) {
-        try (Socket socket = new Socket(SERVER_ADDRESS, PORT);
-             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream input = new ObjectInputStream(socket.getInputStream())) {
-
-            output.writeObject("ADD_USER");
-            output.writeObject(user);
-            return "SUCCESS".equals(input.readObject());
-
-        } catch (IOException | ClassNotFoundException e) {
+    /** Save a new user to the XML file */
+    public static boolean saveUser(User user) {
+         try {
+            List<User> users = ServerXml.loadUsersFromXML();
+            users.add(user);
+            ServerXml.saveUsersToXML(users);
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -43,26 +29,21 @@ public class ServerConnection {
 
     /** Validate user */
     public static String validateUser(String username, String password, String accountType) {
-        try (Socket socket = new Socket(SERVER_ADDRESS, PORT);
-             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream input = new ObjectInputStream(socket.getInputStream())) {
+        List<User> users = ServerXml.loadUsersFromXML();
 
-            output.writeObject("VALIDATE_USER");
-            output.writeObject(username);
-            output.writeObject(password);
-            output.writeObject(accountType);  // Ensure this is sent correctly
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password) &&
+                    user.getAccountType().equalsIgnoreCase(accountType)) {
 
-            return (String) input.readObject(); // Returns "VALID_BUYER", "VALID_BOOKOWNER", or "INVALID"
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return "ERROR";
+                if ("BUYER".equalsIgnoreCase(accountType)) {
+                    return "VALID_BUYER";
+                } else if ("BOOKOWNER".equalsIgnoreCase(accountType)) {
+                    return "VALID_BOOKOWNER";
+                }
+            }
         }
+        return "INVALID";
     }
 
-    /** Functional interface for server actions. */
-    @FunctionalInterface
-    private interface ServerAction<T> {
-        T perform(ObjectOutputStream output, ObjectInputStream input) throws IOException, ClassNotFoundException;
-    }
+
 }

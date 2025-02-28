@@ -1,13 +1,31 @@
 <transactions>
         <user>
             <username>filine</username>
-            <date>02-18-2025</date>
+            <date>01-21-2024</date>
             <transactionId>1739808347382-000001</transactionId>
-            <bookTitle>And Then There Were None</bookTitle>
-            <quantity>1</quantity>
-            <price>474.00</price>
-            <totalAmount>474.00</totalAmount>
+            <bookTitle>A Tale of Two Cities</bookTitle>
+            <quantity>3</quantity>
+            <price>415.0</price>
+            <totalAmount>1245.00</totalAmount>
         </user>
+    <user>
+        <username>2242048</username>
+        <date>01-21-2024</date>
+        <transactionId>1739808347382-000001</transactionId>
+        <bookTitle>A Tale of Two Cities</bookTitle>
+        <quantity>3</quantity>
+        <price>415.0</price>
+        <totalAmount>1245.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808347382-000001</transactionId>
+        <bookTitle>And Then There Were None</bookTitle>
+        <quantity>1</quantity>
+        <price>474.00</price>
+        <totalAmount>474.00</totalAmount>
+    </user>
         <user>
             <username>filine</username>
             <date>02-18-2025</date>

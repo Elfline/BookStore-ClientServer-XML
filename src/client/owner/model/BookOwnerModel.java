@@ -1,7 +1,7 @@
 package client.owner.model;
 
 import utilities.Book;
-import server.XMLUtils;
+import server.ServerXml;
 
 import java.io.*;
 import java.net.Socket;
@@ -18,7 +18,7 @@ public class BookOwnerModel {
 
     public BookOwnerModel() {
         System.out.println("[CLIENT] Requesting the books data from server...");
-        this.books = XMLUtils.readBooksFromXML(BOOKS_FILE);
+        this.books = ServerXml.readBooksFromXML(BOOKS_FILE);
         requestBooksFromServer();
     }
     public void setUpdateCallback(Runnable callback) {
@@ -62,7 +62,7 @@ public class BookOwnerModel {
         saveBooksFile(xmlData); // Save received books.xml
 
         // Reload books from saved file
-        XMLUtils.readBooksFromXML(BOOKS_FILE);
+        ServerXml.readBooksFromXML(BOOKS_FILE);
 
         if (updateCallback != null) {
             updateCallback.run(); // Notify UI to refresh
