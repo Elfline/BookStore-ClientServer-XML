@@ -91,27 +91,48 @@ public class ServerXml {
     }
 
     /** Save users list to XML file */
-    public static void saveUsers(List<User> users) throws Exception {
+    public static boolean saveUsers(User newUser) throws Exception {
+        File xmlFile = new File(ACCOUNTS_FILE);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.newDocument();
-        doc.getDocumentElement().normalize();
+        Document doc;
 
-        Element rootElement = doc.createElement("accounts");
-        doc.appendChild(rootElement);
-
-        for (User user : users) {
-            Element userElement = doc.createElement("user");
-
-            appendChildElement(doc, userElement, "Username", user.getUsername());
-            appendChildElement(doc, userElement, "Password", user.getPassword());
-            appendChildElement(doc, userElement, "AccountType", user.getAccountType());
-
-            rootElement.appendChild(userElement);
+        if (xmlFile.exists() && xmlFile.length() > 0) {
+            // Load existing XML document
+            doc = builder.parse(xmlFile);
+            doc.getDocumentElement().normalize();
+        } else {
+            // Create a new XML document if none exists
+            doc = builder.newDocument();
+            Element rootElement = doc.createElement(ACCOUNTS_FILE);
+            doc.appendChild(rootElement);
         }
 
-        saveXmlDocument(doc, new File(ACCOUNTS_FILE));
+        Element rootElement = doc.getDocumentElement();
+
+        // Check if the user already exists
+        NodeList userList = rootElement.getElementsByTagName("user");
+        for (int i = 0; i < userList.getLength(); i++) {
+            Element existingUser = (Element) userList.item(i);
+            String existingUsername = existingUser.getElementsByTagName("Username").item(0).getTextContent();
+            if (existingUsername.equals(newUser.getUsername())) {
+                System.out.println("[SERVER] User " + newUser.getUsername() + " already exists.");
+                return false; // User already exists
+            }
+        }
+
+        // Create new user entry
+        Element userElement = doc.createElement("user");
+        appendChildElement(doc, userElement, "Username", newUser.getUsername());
+        appendChildElement(doc, userElement, "Password", newUser.getPassword());
+        appendChildElement(doc, userElement, "AccountType", newUser.getAccountType());
+
+        rootElement.appendChild(userElement);
+
+        saveXmlDocument(doc, xmlFile);
+        return true;
     }
+
     /** Loads users from the given file */
     public static List<User> loadUsersFromFile(File userFile) {
         List<User> users = new ArrayList<>();
@@ -254,12 +275,12 @@ public class ServerXml {
             String title = bookElement.getElementsByTagName("Title").item(0).getTextContent();
             int quantity = Integer.parseInt(bookElement.getElementsByTagName("Quantity").item(0).getTextContent());
 
-            // Find the matching book in bookUtilities list
+            // Find the matching book in the catalog
             Book matchingBook = findBookByTitle(books, title);
 
             if (matchingBook != null) {
                 if (matchingBook.getStock() >= quantity) {
-                    System.out.println("[Server] " + quantity + " book/s of '" + title + "' have been successfully bought by " + username);
+                    System.out.println("[SERVER] " + quantity + " book/s of '" + title + "' successfully purchased by " + username);
                     matchingBook.setStock(matchingBook.getStock() - quantity); // Reduce stock
 
                     // Calculate total for this book
@@ -272,15 +293,21 @@ public class ServerXml {
 
                     transactions.add(new Transaction(username, currentDate, transactionId, title, quantity, matchingBook.getPrice(), bookTotal));
                 } else {
-                    System.out.println("[Server] Not enough stock for the book: " + title);
+                    System.out.println("[SERVER] Not enough stock for the book: " + title);
                 }
             } else {
-                System.out.println("[Server] Book not found in catalog: " + title);
+                System.out.println("[SERVER] Book not found in catalog: " + title);
             }
         }
+
+        // Save updated book stock
         saveBooks(books, bookXML);
-        saveTransactions(transactions);
+        if (!transactions.isEmpty()) {
+            saveTransactions(username, transactions);
+            saveSales();
+        }
     }
+
 
     /** Generate unique transactionId for every purchased */
     private static String generateUniqueTransactionId() {
@@ -314,7 +341,6 @@ public class ServerXml {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             doc = builder.newDocument();
-            doc.getDocumentElement().normalize();
             Element root = doc.createElement("transactions");
             doc.appendChild(root);
         }
@@ -323,27 +349,33 @@ public class ServerXml {
 
         for (Transaction transaction : newTransactions) {
             Element userElement = doc.createElement("user");
+            userElement.setAttribute("username", transaction.getUsername());
 
-            appendChildElement(doc, userElement, "username", transaction.getUsername());
-            appendChildElement(doc, userElement, "date", transaction.getDate());
-            appendChildElement(doc, userElement, "transactionId", transaction.getTransactionId());
-            appendChildElement(doc, userElement, "bookTitle", transaction.getBookTitle());
-            appendChildElement(doc, userElement, "quantity", String.valueOf(transaction.getQuantity()));
-            appendChildElement(doc, userElement, "price", String.format("%.2f", transaction.getPrice()));
-            appendChildElement(doc, userElement, "totalAmount", String.format("%.2f", transaction.getTotalAmount()));
+            Element transactionElement = doc.createElement("transaction");
+            appendChildElement(doc, transactionElement, "date", transaction.getDate());
+            appendChildElement(doc, transactionElement, "transactionId", transaction.getTransactionId());
+            appendChildElement(doc, transactionElement, "bookTitle", transaction.getBookTitle());
+            appendChildElement(doc, transactionElement, "quantity", String.valueOf(transaction.getQuantity()));
+            appendChildElement(doc, transactionElement, "price", String.format("%.2f", transaction.getPrice()));
+            appendChildElement(doc, transactionElement, "totalAmount", String.format("%.2f", transaction.getTotalAmount()));
 
+            userElement.appendChild(transactionElement);
             root.appendChild(userElement);
         }
 
         saveXmlDocument(doc, file);
+
+        // Now save sales correctly
+        saveSales(newTransactions);
     }
+
 
     /** Method in loading transactions from an XML file */
     public static List<Transaction> loadTransactions(File file) {
         List<Transaction> transactions = new ArrayList<>();
 
         if (!file.exists()) {
-            System.err.println("[DEBUG] Transactions.xml not found");
+            System.err.println("[DEBUG] Transactions.xml file not found: " + file.getAbsolutePath());
             return transactions;
         }
 
@@ -353,21 +385,35 @@ public class ServerXml {
             Document doc = builder.parse(file);
             doc.getDocumentElement().normalize();
 
-            NodeList nodeList = doc.getElementsByTagName("user");
+            NodeList userList = doc.getElementsByTagName("user");
 
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
+            for (int i = 0; i < userList.getLength(); i++) {
+                Element userElement = (Element) userList.item(i);
+                String username = userElement.getAttribute("username");
 
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) node;
+                NodeList transactionNodes = userElement.getElementsByTagName("transaction");
 
-                    String username = element.getElementsByTagName("username").item(0).getTextContent();
-                    String date = element.getElementsByTagName("date").item(0).getTextContent();
-                    String transactionId = element.getElementsByTagName("transactionId").item(0).getTextContent();
-                    String bookTitle = element.getElementsByTagName("bookTitle").item(0).getTextContent();
-                    int quantity = Integer.parseInt(element.getElementsByTagName("quantity").item(0).getTextContent());
-                    double price = Double.parseDouble(element.getElementsByTagName("price").item(0).getTextContent());
-                    double totalAmount = Double.parseDouble(element.getElementsByTagName("totalAmount").item(0).getTextContent());
+                for (int j = 0; j < transactionNodes.getLength(); j++) {
+                    Element transactionElement = (Element) transactionNodes.item(j);
+
+                    String date = transactionElement.getElementsByTagName("date").item(0).getTextContent();
+                    String transactionId = transactionElement.getElementsByTagName("transactionId").item(0).getTextContent();
+                    String bookTitle = transactionElement.getElementsByTagName("bookTitle").item(0).getTextContent();
+                    int quantity = Integer.parseInt(transactionElement.getElementsByTagName("quantity").item(0).getTextContent());
+
+                    double price = 0.0;
+                    double totalAmount = 0.0;
+
+                    // Handle missing or malformed price and totalAmount
+                    Node priceNode = transactionElement.getElementsByTagName("price").item(0);
+                    if (priceNode != null) {
+                        price = Double.parseDouble(priceNode.getTextContent());
+                    }
+
+                    Node totalAmountNode = transactionElement.getElementsByTagName("totalAmount").item(0);
+                    if (totalAmountNode != null) {
+                        totalAmount = Double.parseDouble(totalAmountNode.getTextContent());
+                    }
 
                     transactions.add(new Transaction(username, date, transactionId, bookTitle, quantity, price, totalAmount));
                 }
@@ -379,16 +425,17 @@ public class ServerXml {
         return transactions;
     }
 
+
     /** Method for saving sales to sales.xml */
-    public static void saveSales() {
+    public static synchronized void saveSales(List<Transaction> transactions) {
         try {
             File transactionsFile = new File(TRANSACTIONS_FILE);
             if (!transactionsFile.exists()) {
-                System.out.println("[DEBUG] Transactions.xml file not found");
+                System.out.println("[DEBUG] transactions.xml file not found.");
                 return;
             }
 
-            // Parse transactions.xml using helper method
+            // Parse transactions.xml
             Document transactionsDoc = parseXml(transactionsFile);
             transactionsDoc.getDocumentElement().normalize();
 
@@ -397,28 +444,36 @@ public class ServerXml {
             Map<String, Double> monthlyRevenue = new HashMap<>();
             Map<String, Double> yearlyRevenue = new HashMap<>();
 
-            NodeList nodeList = transactionsDoc.getElementsByTagName("user");
+            NodeList userList = transactionsDoc.getElementsByTagName("user");
 
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Element transaction = (Element) nodeList.item(i);
-                String date = transaction.getElementsByTagName("date").item(0).getTextContent();
-                String year = date.substring(6, 10);
-                String month = date.substring(0, 2);
-                String day = date.substring(3, 5);
-                String totalAmount = transaction.getElementsByTagName("totalAmount").item(0).getTextContent();
+            for (int i = 0; i < userList.getLength(); i++) {
+                Element userElement = (Element) userList.item(i);
+                String username = userElement.getAttribute("username");
 
-                // Organize transactions per year, month, and day
-                salesData.computeIfAbsent(year, y -> new TreeMap<>())
-                        .computeIfAbsent(month, m -> new TreeMap<>())
-                        .computeIfAbsent(day, d -> new ArrayList<>())
-                        .add(transaction);
+                NodeList transactionNodes = userElement.getElementsByTagName("transaction");
 
-                // Compute revenue per month and year
-                String monthKey = year + "-" + month;
-                String yearKey = year;
-                double amount = Double.parseDouble(totalAmount);
-                monthlyRevenue.put(monthKey, monthlyRevenue.getOrDefault(monthKey, 0.0) + amount);
-                yearlyRevenue.put(yearKey, yearlyRevenue.getOrDefault(yearKey, 0.0) + amount);
+                for (int j = 0; j < transactionNodes.getLength(); j++) {
+                    Element transaction = (Element) transactionNodes.item(j);
+
+                    String date = transaction.getElementsByTagName("date").item(0).getTextContent();
+                    String year = date.substring(6, 10);
+                    String month = date.substring(0, 2);
+                    String day = date.substring(3, 5);
+                    String totalAmount = transaction.getElementsByTagName("totalAmount").item(0).getTextContent();
+
+                    // Organize transactions per year, month, and day
+                    salesData.computeIfAbsent(year, y -> new TreeMap<>())
+                            .computeIfAbsent(month, m -> new TreeMap<>())
+                            .computeIfAbsent(day, d -> new ArrayList<>())
+                            .add(transaction);
+
+                    // Compute revenue per month and year
+                    String monthKey = year + "-" + month;
+                    String yearKey = year;
+                    double amount = Double.parseDouble(totalAmount);
+                    monthlyRevenue.put(monthKey, monthlyRevenue.getOrDefault(monthKey, 0.0) + amount);
+                    yearlyRevenue.put(yearKey, yearlyRevenue.getOrDefault(yearKey, 0.0) + amount);
+                }
             }
 
             // Generate sales.xml
@@ -474,6 +529,7 @@ public class ServerXml {
 
         File file = new File(FAVORITE_FILE);
         Document doc;
+        Element root;
 
         if (file.exists() && file.length() > 0) {
             doc = parseXml(file);
@@ -481,26 +537,38 @@ public class ServerXml {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             doc = builder.newDocument();
-            doc.getDocumentElement().normalize();
-            Element root = doc.createElement("favorites");
+            root = doc.createElement("favorites");
             doc.appendChild(root);
         }
 
-        Element root = doc.getDocumentElement();
-
-        for (Favorites favorites : newFavorites) {
-            Element userElement = doc.createElement("user");
-
-            appendChildElement(doc, userElement, "username", favorites.getUser());
-            appendChildElement(doc, userElement, "title", favorites.getTitle());
-            appendChildElement(doc, userElement, "author", favorites.getAuthor());
-            appendChildElement(doc, userElement, "year", favorites.getYear());
-            appendChildElement(doc, userElement, "stock", String.valueOf(favorites.getStock()));
-
-            root.appendChild(userElement);
+        // Remove existing favorites for the user if they already exist
+        NodeList users = root.getElementsByTagName("user");
+        for (int i = 0; i < users.getLength(); i++) {
+            Element userElement = (Element) users.item(i);
+            if (userElement.getAttribute("username").equals(username)) {
+                root.removeChild(userElement);
+                break;  // Remove only the first occurrence
+            }
         }
+        // Create a new user element
+        Element userElement = doc.createElement("user");
+        userElement.setAttribute("username", username);
+
+        // Add favorite books under this user
+        for (Favorites favorite : newFavorites) {
+            Element bookElement = doc.createElement("book");
+
+            appendChildElement(doc, bookElement, "title", favorite.getTitle());
+            appendChildElement(doc, bookElement, "author", favorite.getAuthor());
+            appendChildElement(doc, bookElement, "year", favorite.getYear());
+            appendChildElement(doc, bookElement, "stock", String.valueOf(favorite.getStock()));
+
+            userElement.appendChild(bookElement);
+        }
+        root.appendChild(userElement);
 
         saveXmlDocument(doc, file);
+        System.out.println("[SERVER] Favorites updated successfully for user: " + username);
     }
 
     public static List<Favorites> loadFavorites(File file) {
@@ -510,25 +578,34 @@ public class ServerXml {
             System.err.println("[DEBUG] Favorites file not found: " + file.getAbsolutePath());
             return favorites;
         }
+
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
             doc.getDocumentElement().normalize();
 
-            NodeList nodeList = doc.getElementsByTagName("user");
+            NodeList userList = doc.getElementsByTagName("user");
 
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
+            for (int i = 0; i < userList.getLength(); i++) {
+                Element userElement = (Element) userList.item(i);
+                String username = userElement.getAttribute("username");
 
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) node;
+                NodeList favoriteNodes = userElement.getElementsByTagName("favorite");
 
-                    String username = element.getElementsByTagName("username").item(0).getTextContent();
-                    String title = element.getElementsByTagName("title").item(0).getTextContent();
-                    String author = element.getElementsByTagName("author").item(0).getTextContent();
-                    String year = element.getElementsByTagName("year").item(0).getTextContent();
-                    int stock = Integer.parseInt(element.getElementsByTagName("stock").item(0).getTextContent());
+                for (int j = 0; j < favoriteNodes.getLength(); j++) {
+                    Element favoriteElement = (Element) favoriteNodes.item(j);
+
+                    String title = favoriteElement.getElementsByTagName("title").item(0).getTextContent();
+                    String author = favoriteElement.getElementsByTagName("author").item(0).getTextContent();
+                    String year = favoriteElement.getElementsByTagName("year").item(0).getTextContent();
+                    int stock = 0;
+
+                    // Handle optional stock field
+                    Node stockNode = favoriteElement.getElementsByTagName("stock").item(0);
+                    if (stockNode != null) {
+                        stock = Integer.parseInt(stockNode.getTextContent());
+                    }
 
                     favorites.add(new Favorites(username, title, author, year, stock));
                 }
@@ -539,4 +616,5 @@ public class ServerXml {
 
         return favorites;
     }
+
 }

@@ -1,3 +1,16 @@
 <favorites>
-
+    <user username="filine">
+        <book>
+            <title>Noli Me Tangere</title>
+            <author>Jose Rizal</author>
+            <year>1995</year>
+            <stock>480</stock>
+        </book>
+        <book>
+            <title>Decision in Normandy</title>
+            <author>Carlo D Este</author>
+            <year>1991</year>
+            <stock>17</stock>
+        </book>
+    </user>
 </favorites>

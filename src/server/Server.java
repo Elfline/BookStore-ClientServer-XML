@@ -361,26 +361,30 @@ public class Server {
                     userTransactions.add(t);
                 }
             }
+
             if (userTransactions.isEmpty()) {
                 System.out.println("[DEBUG] No transactions found for user: " + username);
                 return;
             }
 
-            // Create temporary XML file for the specified user's transactions
-            File userTransactionFile = new File ("res/server/temp_transactions_" +username+".xml");
-            ServerXml.saveTransactions(userTransactions, userTransactionFile);
+            // Create a temporary XML file for this user's transactions
+            File userTransactionFile = new File("res/server/temp_transactions_" + username + ".xml");
+            ServerXml.saveTransactions(username, userTransactions);
 
+            // Send the file to the user
             ObjectOutputStream output = new ObjectOutputStream(clientSockets.get(username).getOutputStream());
             output.writeObject("UPDATE_TRANSACTIONS");
             output.writeObject(userTransactionFile);
             output.flush();
 
             System.out.println("[SERVER] Sent transactions.xml to user: " + username);
-
         } catch (IOException e) {
             System.err.println("[DEBUG] Error sending transactions.xml to " + username + ": " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to process transactions for " + username + ": " + e.getMessage());
         }
     }
+
     /** Method for sending transactions.xml to specified user */
     private static synchronized void sendFavoritesToUsers(String username) {
         File favoriteFile = new File(FAVORITE_FILE);
@@ -406,10 +410,11 @@ public class Server {
                 return;
             }
 
-            // Create a temporary XML file for the user's favorites
+            // Create a temporary XML file for this user's favorites
             File userFavoriteFile = new File("res/server/temp_favorites_" + username + ".xml");
-            ServerXml.saveFavorites(userFavorites, userFavoriteFile);
+            ServerXml.saveFavorites(username, userFavorites); // Corrected method call
 
+            // Send the file to the user
             ObjectOutputStream output = new ObjectOutputStream(clientSockets.get(username).getOutputStream());
             output.writeObject("UPDATE_FAVORITES");
             output.writeObject(userFavoriteFile);
@@ -418,6 +423,8 @@ public class Server {
             System.out.println("[SERVER] Sent favorites.xml to user: " + username);
         } catch (IOException e) {
             System.err.println("[DEBUG] Error sending favorites.xml to " + username + ": " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to process favorites for " + username + ": " + e.getMessage());
         }
     }
 
