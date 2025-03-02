@@ -3,7 +3,6 @@ package client.buyer.controller;
 import client.buyer.model.BookStoreLoginModel;
 import client.buyer.view.BookStoreLoginView;
 import utilities.User;
-import server.ServerConnection;
 
 import javax.swing.*;
 import java.awt.event.*;

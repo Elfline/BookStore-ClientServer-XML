@@ -1,7 +1,6 @@
 package client.buyer.model;
 
 import client.buyer.view.BookStoreLoginView;
-import server.ServerConnection;
 import utilities.User;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;

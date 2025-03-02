@@ -1,0 +1,7 @@
+<accounts>
+    <user>
+        <username>admin</username>
+        <password>1234</password>
+        <accountType>Book Owner</accountType>
+    </user>
+</accounts>

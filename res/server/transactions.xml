@@ -1,13 +1,13 @@
 <transactions>
-        <user>
-            <username>filine</username>
-            <date>01-21-2024</date>
-            <transactionId>1739808347382-000001</transactionId>
-            <bookTitle>A Tale of Two Cities</bookTitle>
-            <quantity>3</quantity>
-            <price>415.0</price>
-            <totalAmount>1245.00</totalAmount>
-        </user>
+    <user>
+        <username>filine</username>
+        <date>01-21-2024</date>
+        <transactionId>1739808347382-000001</transactionId>
+        <bookTitle>A Tale of Two Cities</bookTitle>
+        <quantity>3</quantity>
+        <price>415.0</price>
+        <totalAmount>1245.00</totalAmount>
+    </user>
     <user>
         <username>2242048</username>
         <date>01-21-2024</date>
@@ -26,158 +26,157 @@
         <price>474.00</price>
         <totalAmount>474.00</totalAmount>
     </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739808347476-000002</transactionId>
-            <bookTitle>Eragon, Eldest, Brisingr</bookTitle>
-            <quantity>2</quantity>
-            <price>387.00</price>
-            <totalAmount>774.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739808347477-000003</transactionId>
-            <bookTitle>Fragile Things</bookTitle>
-            <quantity>1</quantity>
-            <price>349.00</price>
-            <totalAmount>349.00</totalAmount>
-        </user>
-        <user>
-            <username>a</username>
-            <date>02-18-2025</date>
-            <transactionId>1739808447905-000004</transactionId>
-            <bookTitle>Charlotte Web</bookTitle>
-            <quantity>1</quantity>
-            <price>280.00</price>
-            <totalAmount>280.00</totalAmount>
-        </user>
-        <user>
-            <username>a</username>
-            <date>02-18-2025</date>
-            <transactionId>1739808447906-000005</transactionId>
-            <bookTitle>Catching Fire</bookTitle>
-            <quantity>1</quantity>
-            <price>300.00</price>
-            <totalAmount>300.00</totalAmount>
-        </user>
-        <user>
-            <username>a</username>
-            <date>02-18-2025</date>
-            <transactionId>1739808447906-000006</transactionId>
-            <bookTitle>Call Me by Your Name</bookTitle>
-            <quantity>1</quantity>
-            <price>319.00</price>
-            <totalAmount>319.00</totalAmount>
-        </user>
-        <user>
-            <username>a</username>
-            <date>02-18-2025</date>
-            <transactionId>1739808447908-000007</transactionId>
-            <bookTitle>The Bad Decisions Playlist</bookTitle>
-            <quantity>2</quantity>
-            <price>214.00</price>
-            <totalAmount>428.00</totalAmount>
-        </user>
-        <user>
-            <username>a</username>
-            <date>02-18-2025</date>
-            <transactionId>1739808998163-000001</transactionId>
-            <bookTitle>The Jungle Book</bookTitle>
-            <quantity>1</quantity>
-            <price>207.00</price>
-            <totalAmount>207.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739809482118-000002</transactionId>
-            <bookTitle>Obsidian</bookTitle>
-            <quantity>1</quantity>
-            <price>359.00</price>
-            <totalAmount>359.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739809482119-000003</transactionId>
-            <bookTitle>Oryx and Crake</bookTitle>
-             <quantity>1</quantity>
-            <price>407.00</price>
-            <totalAmount>407.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739866522094-000001</transactionId>
-            <bookTitle>Maggot Moon</bookTitle>
-            <quantity>1</quantity>
-            <price>228.00</price>
-            <totalAmount>228.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739866522204-000002</transactionId>
-            <bookTitle>Mockingjay</bookTitle>
-            <quantity>1</quantity>
-            <price>365.00</price>
-            <totalAmount>365.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739866522205-000003</transactionId>
-            <bookTitle>Love Medicine</bookTitle>
-            <quantity>1</quantity>
-            <price>475.00</price>
-            <totalAmount>475.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739866522205-000004</transactionId>
-            <bookTitle>Like Water for Chocolate</bookTitle>
-            <quantity>2</quantity>
-            <price>197.00</price>
-            <totalAmount>394.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739876713536-000001</transactionId>
-            <bookTitle>Obsidian</bookTitle>
-            <quantity>1</quantity>
-            <price>359.00</price>
-            <totalAmount>359.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739876713542-000002</transactionId>
-            <bookTitle>Oryx and Crake</bookTitle>
-            <quantity>1</quantity>
-            <price>407.00</price>
-            <totalAmount>407.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-18-2025</date>
-            <transactionId>1739876713542-000003</transactionId>
-            <bookTitle>Olivia</bookTitle>
-            <quantity>1</quantity>
-            <price>173.00</price>
-            <totalAmount>173.00</totalAmount>
-        </user>
-        <user>
-            <username>filine</username>
-            <date>02-20-2025</date>
-            <transactionId>1739981603697-000001</transactionId>
-            <bookTitle>Book</bookTitle>
-            <quantity>1</quantity>
-            <price>576.70</price>
-            <totalAmount>576.70</totalAmount>
-        </user>
-
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808347476-000002</transactionId>
+        <bookTitle>Eragon, Eldest, Brisingr</bookTitle>
+        <quantity>2</quantity>
+        <price>387.00</price>
+        <totalAmount>774.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808347477-000003</transactionId>
+        <bookTitle>Fragile Things</bookTitle>
+        <quantity>1</quantity>
+        <price>349.00</price>
+        <totalAmount>349.00</totalAmount>
+    </user>
+    <user>
+        <username>jewel</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808447905-000004</transactionId>
+        <bookTitle>Charlotte Web</bookTitle>
+        <quantity>1</quantity>
+        <price>280.00</price>
+        <totalAmount>280.00</totalAmount>
+    </user>
+    <user>
+        <username>jewel</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808447906-000005</transactionId>
+        <bookTitle>Catching Fire</bookTitle>
+        <quantity>1</quantity>
+        <price>300.00</price>
+        <totalAmount>300.00</totalAmount>
+    </user>
+    <user>
+        <username>jewel</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808447906-000006</transactionId>
+        <bookTitle>Call Me by Your Name</bookTitle>
+        <quantity>1</quantity>
+        <price>319.00</price>
+        <totalAmount>319.00</totalAmount>
+    </user>
+    <user>
+        <username>jewel</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808447908-000007</transactionId>
+        <bookTitle>The Bad Decisions Playlist</bookTitle>
+        <quantity>2</quantity>
+        <price>214.00</price>
+        <totalAmount>428.00</totalAmount>
+    </user>
+    <user>
+        <username>jewel</username>
+        <date>02-18-2025</date>
+        <transactionId>1739808998163-000001</transactionId>
+        <bookTitle>The Jungle Book</bookTitle>
+        <quantity>1</quantity>
+        <price>207.00</price>
+        <totalAmount>207.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739809482118-000002</transactionId>
+        <bookTitle>Obsidian</bookTitle>
+        <quantity>1</quantity>
+        <price>359.00</price>
+        <totalAmount>359.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739809482119-000003</transactionId>
+        <bookTitle>Oryx and Crake</bookTitle>
+        <quantity>1</quantity>
+        <price>407.00</price>
+        <totalAmount>407.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739866522094-000001</transactionId>
+        <bookTitle>Maggot Moon</bookTitle>
+        <quantity>1</quantity>
+        <price>228.00</price>
+        <totalAmount>228.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739866522204-000002</transactionId>
+        <bookTitle>Mockingjay</bookTitle>
+        <quantity>1</quantity>
+        <price>365.00</price>
+        <totalAmount>365.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739866522205-000003</transactionId>
+        <bookTitle>Love Medicine</bookTitle>
+        <quantity>1</quantity>
+        <price>475.00</price>
+        <totalAmount>475.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739866522205-000004</transactionId>
+        <bookTitle>Like Water for Chocolate</bookTitle>
+        <quantity>2</quantity>
+        <price>197.00</price>
+        <totalAmount>394.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739876713536-000001</transactionId>
+        <bookTitle>Obsidian</bookTitle>
+        <quantity>1</quantity>
+        <price>359.00</price>
+        <totalAmount>359.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739876713542-000002</transactionId>
+        <bookTitle>Oryx and Crake</bookTitle>
+        <quantity>1</quantity>
+        <price>407.00</price>
+        <totalAmount>407.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-18-2025</date>
+        <transactionId>1739876713542-000003</transactionId>
+        <bookTitle>Olivia</bookTitle>
+        <quantity>1</quantity>
+        <price>173.00</price>
+        <totalAmount>173.00</totalAmount>
+    </user>
+    <user>
+        <username>filine</username>
+        <date>02-20-2025</date>
+        <transactionId>1739981603697-000001</transactionId>
+        <bookTitle>Book</bookTitle>
+        <quantity>1</quantity>
+        <price>576.70</price>
+        <totalAmount>576.70</totalAmount>
+    </user>
 </transactions>

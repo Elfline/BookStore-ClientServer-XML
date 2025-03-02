@@ -2,7 +2,6 @@ package client.owner.controller;
 
 import client.owner.model.BookOwnerLoginModel;
 import client.owner.view.BookOwnerLoginView;
-import server.ServerConnection;
 import utilities.User;
 
 import java.awt.event.ActionEvent;

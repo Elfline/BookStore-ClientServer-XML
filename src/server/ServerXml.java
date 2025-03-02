@@ -53,14 +53,14 @@ public class ServerXml {
     }
 
     /** Load users from XML file */
-    public static List<User> loadUsersFromXML() {
+    public static List<User> loadUsers() {
         File xmlFile = new File(ACCOUNTS_FILE);
 
         try {
             if (!xmlFile.exists()) {
                 System.out.println("[SERVER] accounts.xml not found, creating a new one.");
                 Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-                Element rootElement = doc.createElement("users");
+                Element rootElement = doc.createElement("accounts");
                 doc.appendChild(rootElement);
                 return users; // Return empty list if file doesn't exist
             }
@@ -91,13 +91,13 @@ public class ServerXml {
     }
 
     /** Save users list to XML file */
-    public static void saveUsersToXML(List<User> users) throws Exception {
+    public static void saveUsers(List<User> users) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.newDocument();
         doc.getDocumentElement().normalize();
 
-        Element rootElement = doc.createElement("users");
+        Element rootElement = doc.createElement("accounts");
         doc.appendChild(rootElement);
 
         for (User user : users) {
@@ -111,6 +111,72 @@ public class ServerXml {
         }
 
         saveXmlDocument(doc, new File(ACCOUNTS_FILE));
+    }
+    /** Loads users from the given file */
+    public static List<User> loadUsersFromFile(File userFile) {
+        List<User> users = new ArrayList<>();
+
+        try {
+            if (!userFile.exists()) {
+                System.out.println("[SERVER] File not found: " + userFile.getAbsolutePath());
+                return users; // Return empty list if file doesn't exist
+            }
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(userFile);
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("user");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+
+                    String username = element.getElementsByTagName("username").item(0).getTextContent();
+                    String password = element.getElementsByTagName("password").item(0).getTextContent();
+                    String accountType = element.getElementsByTagName("accountType").item(0).getTextContent();
+
+                    users.add(new User(username, password, accountType));
+                }
+            }
+            System.out.println("[SERVER] Loaded " + users.size() + " users from " + userFile.getName());
+
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to load users from " + userFile.getName() + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    /** Method for loading a single user from XML for logout.xml */
+    public static User loadUserForLoggedOut(File file) {
+        if (!file.exists()) {
+            System.err.println("[DEBUG] Logout XML file not found: " + file.getAbsolutePath());
+            return null;
+        }
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+            doc.getDocumentElement().normalize();
+
+            NodeList userList = doc.getElementsByTagName("user");
+
+            if (userList.getLength() == 0) {
+                System.err.println("[DEBUG] No user data found in logout.xml.xml.");
+                return null;
+            }
+
+            Element userElement = (Element) userList.item(0);
+            String username = userElement.getElementsByTagName("username").item(0).getTextContent();
+
+            return new User(username);
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to parse logout.xml.xml: " + e.getMessage());
+            return null;
+        }
     }
 
     /** Load books from XML file */
@@ -225,7 +291,7 @@ public class ServerXml {
     }
 
     /**
-     * method to find a book by title in the list of BookUtilities
+     * method to find a book by title that is used in cart
      */
     public static Book findBookByTitle(List<Book> books, String title) {
         for (Book book : books) {
@@ -270,6 +336,47 @@ public class ServerXml {
         }
 
         saveXmlDocument(doc, file);
+    }
+
+    /** Method in loading transactions from an XML file */
+    public static List<Transaction> loadTransactions(File file) {
+        List<Transaction> transactions = new ArrayList<>();
+
+        if (!file.exists()) {
+            System.err.println("[DEBUG] Transactions.xml not found");
+            return transactions;
+        }
+
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("user");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+
+                    String username = element.getElementsByTagName("username").item(0).getTextContent();
+                    String date = element.getElementsByTagName("date").item(0).getTextContent();
+                    String transactionId = element.getElementsByTagName("transactionId").item(0).getTextContent();
+                    String bookTitle = element.getElementsByTagName("bookTitle").item(0).getTextContent();
+                    int quantity = Integer.parseInt(element.getElementsByTagName("quantity").item(0).getTextContent());
+                    double price = Double.parseDouble(element.getElementsByTagName("price").item(0).getTextContent());
+                    double totalAmount = Double.parseDouble(element.getElementsByTagName("totalAmount").item(0).getTextContent());
+
+                    transactions.add(new Transaction(username, date, transactionId, bookTitle, quantity, price, totalAmount));
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to load transactions.xml: " + e.getMessage());
+        }
+
+        return transactions;
     }
 
     /** Method for saving sales to sales.xml */
@@ -361,4 +468,75 @@ public class ServerXml {
         }
     }
 
+    /** Method for saving the favorites to favorites.xml */
+    public static void saveFavorites(String username, List<Favorites> newFavorites) throws Exception {
+        System.out.println("[SERVER] Received favorites XML for user: " + username);
+
+        File file = new File(FAVORITE_FILE);
+        Document doc;
+
+        if (file.exists() && file.length() > 0) {
+            doc = parseXml(file);
+        } else {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            doc = builder.newDocument();
+            doc.getDocumentElement().normalize();
+            Element root = doc.createElement("favorites");
+            doc.appendChild(root);
+        }
+
+        Element root = doc.getDocumentElement();
+
+        for (Favorites favorites : newFavorites) {
+            Element userElement = doc.createElement("user");
+
+            appendChildElement(doc, userElement, "username", favorites.getUser());
+            appendChildElement(doc, userElement, "title", favorites.getTitle());
+            appendChildElement(doc, userElement, "author", favorites.getAuthor());
+            appendChildElement(doc, userElement, "year", favorites.getYear());
+            appendChildElement(doc, userElement, "stock", String.valueOf(favorites.getStock()));
+
+            root.appendChild(userElement);
+        }
+
+        saveXmlDocument(doc, file);
+    }
+
+    public static List<Favorites> loadFavorites(File file) {
+        List<Favorites> favorites = new ArrayList<>();
+
+        if (!file.exists()) {
+            System.err.println("[DEBUG] Favorites file not found: " + file.getAbsolutePath());
+            return favorites;
+        }
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("user");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+
+                    String username = element.getElementsByTagName("username").item(0).getTextContent();
+                    String title = element.getElementsByTagName("title").item(0).getTextContent();
+                    String author = element.getElementsByTagName("author").item(0).getTextContent();
+                    String year = element.getElementsByTagName("year").item(0).getTextContent();
+                    int stock = Integer.parseInt(element.getElementsByTagName("stock").item(0).getTextContent());
+
+                    favorites.add(new Favorites(username, title, author, year, stock));
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to load favorites.xml: " + e.getMessage());
+        }
+
+        return favorites;
+    }
 }

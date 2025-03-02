@@ -1,0 +1,1154 @@
+<books>
+    <book>
+        <Title>Decision in Normandy</Title>
+        <Author>Carlo D Este</Author>
+        <Genre>Military Fiction</Genre>
+        <Stock>17</Stock>
+        <Year>1991</Year>
+        <Price>195.0</Price>
+    </book>
+    <book>
+        <Title>A Tale of Two Cities</Title>
+        <Author>Charles Dickens</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>15</Stock>
+        <Year>1859</Year>
+        <Price>415.0</Price>
+    </book>
+    <book>
+        <Title>And Then There Were None</Title>
+        <Author>Agatha Christie</Author>
+        <Genre>Mystery</Genre>
+        <Stock>38</Stock>
+        <Year>1939</Year>
+        <Price>474.0</Price>
+    </book>
+    <book>
+        <Title>Dream of the Red Chamber</Title>
+        <Author>Cao Xueqin</Author>
+        <Genre>Family Saga</Genre>
+        <Stock>84</Stock>
+        <Year>1791</Year>
+        <Price>268.0</Price>
+    </book>
+    <book>
+        <Title>Ben-Hur, A Tale of the Christ</Title>
+        <Author>Lew Wallace</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>84</Stock>
+        <Year>1880</Year>
+        <Price>468.0</Price>
+    </book>
+    <book>
+        <Title>Anne of Green Gables</Title>
+        <Author>Lucy Maud Montgomery</Author>
+        <Genre>Children's Novel</Genre>
+        <Stock>74</Stock>
+        <Year>1908</Year>
+        <Price>413.0</Price>
+    </book>
+    <book>
+        <Title>Black Beauty</Title>
+        <Author>Anna Sewell</Author>
+        <Genre>Children Literature</Genre>
+        <Stock>12</Stock>
+        <Year>1877</Year>
+        <Price>274.0</Price>
+    </book>
+    <book>
+        <Title>Charlotte Web</Title>
+        <Author>E. B. White</Author>
+        <Genre>Children Fiction</Genre>
+        <Stock>33</Stock>
+        <Year>1952</Year>
+        <Price>280.0</Price>
+    </book>
+    <book>
+        <Title>Cosmos</Title>
+        <Author>Carl Sagan</Author>
+        <Genre>Philosophy</Genre>
+        <Stock>64</Stock>
+        <Year>1980</Year>
+        <Price>187.0</Price>
+    </book>
+    <book>
+        <Title>Angels &amp; Demons</Title>
+        <Author>Dan Brown</Author>
+        <Genre>Mystery-thriller</Genre>
+        <Stock>53</Stock>
+        <Year>2000</Year>
+        <Price>249.0</Price>
+    </book>
+    <book>
+        <Title>Alcoholics Anonymous Big Book</Title>
+        <Author>Bill Wilson</Author>
+        <Genre>Self-help Book</Genre>
+        <Stock>74</Stock>
+        <Year>1939</Year>
+        <Price>249.0</Price>
+    </book>
+    <book>
+        <Title>A Brief History of Time</Title>
+        <Author>Stephen Hawking</Author>
+        <Genre>Popular Science</Genre>
+        <Stock>78</Stock>
+        <Year>1988</Year>
+        <Price>229.0</Price>
+    </book>
+    <book>
+        <Title>Catching Fire</Title>
+        <Author>Suzanne Collins</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>23</Stock>
+        <Year>2009</Year>
+        <Price>300.0</Price>
+    </book>
+    <book>
+        <Title>Andromeda Nebula</Title>
+        <Author>Ivan Yefremov</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>86</Stock>
+        <Year>1957</Year>
+        <Price>450.0</Price>
+    </book>
+    <book>
+        <Title>Autobiography of a Yogi</Title>
+        <Author>Paramahansa Yogananda</Author>
+        <Genre>Autobiography</Genre>
+        <Stock>96</Stock>
+        <Year>1946</Year>
+        <Price>197.0</Price>
+    </book>
+    <book>
+        <Title>All Quiet on the Western Front</Title>
+        <Author>Erich Maria Remarque</Author>
+        <Genre>War Novel</Genre>
+        <Stock>46</Stock>
+        <Year>1929</Year>
+        <Price>262.0</Price>
+    </book>
+    <book>
+        <Title>Animal Farm</Title>
+        <Author>George Orwell</Author>
+        <Genre>Political Satire</Genre>
+        <Stock>66</Stock>
+        <Year>1945</Year>
+        <Price>453.0</Price>
+    </book>
+    <book>
+        <Title>Adventures of Huckleberry Finn</Title>
+        <Author>Mark Twain</Author>
+        <Genre>Robinsonade</Genre>
+        <Stock>84</Stock>
+        <Year>1885</Year>
+        <Price>466.0</Price>
+    </book>
+    <book>
+        <Title>Dune</Title>
+        <Author>Frank Herbert</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>42</Stock>
+        <Year>1965</Year>
+        <Price>385.0</Price>
+    </book>
+    <book>
+        <Title>Charlie and the Chocolate Factory</Title>
+        <Author>Roald Dahl</Author>
+        <Genre>Children's Fantasy novel</Genre>
+        <Stock>17</Stock>
+        <Year>1964</Year>
+        <Price>189.0</Price>
+    </book>
+    <book>
+        <Title>All the Light We Cannot See</Title>
+        <Author>Anthony Doerr</Author>
+        <Genre>War Novel</Genre>
+        <Stock>52</Stock>
+        <Year>2014</Year>
+        <Price>229.0</Price>
+    </book>
+    <book>
+        <Title>A Wrinkle in Time</Title>
+        <Author>Madeleine L Engle</Author>
+        <Genre>Fantasy Fiction</Genre>
+        <Stock>76</Stock>
+        <Year>1962</Year>
+        <Price>327.0</Price>
+    </book>
+    <book>
+        <Title>Diana, Her True Story</Title>
+        <Author>Andrew Morton</Author>
+        <Genre>Biography</Genre>
+        <Stock>55</Stock>
+        <Year>1992</Year>
+        <Price>213.0</Price>
+    </book>
+    <book>
+        <Title>Confucius from the Heart</Title>
+        <Author>Yu Dan</Author>
+        <Genre>Self-help Book</Genre>
+        <Stock>24</Stock>
+        <Year>2006</Year>
+        <Price>183.0</Price>
+    </book>
+    <book>
+        <Title>Angela's Ashes</Title>
+        <Author>Frank McCourt</Author>
+        <Genre>Autobiography</Genre>
+        <Stock>85</Stock>
+        <Year>1996</Year>
+        <Price>220.0</Price>
+    </book>
+    <book>
+        <Title>And the Mountains Echoed</Title>
+        <Author>Khaled Hosseini</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>27</Stock>
+        <Year>2013</Year>
+        <Price>276.0</Price>
+    </book>
+    <book>
+        <Title>Breaking Dawn</Title>
+        <Author>Stephenie Meyer</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>68</Stock>
+        <Year>2009</Year>
+        <Price>291.0</Price>
+    </book>
+    <book>
+        <Title>Harry Potter and the Prisoner of Azkaban</Title>
+        <Author>J.K. Rowling</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>44</Stock>
+        <Year>1999</Year>
+        <Price>334.0</Price>
+    </book>
+    <book>
+        <Title>East of Eden</Title>
+        <Author>John Steinbeck</Author>
+        <Genre>Classic Fiction</Genre>
+        <Stock>81</Stock>
+        <Year>2001</Year>
+        <Price>337.0</Price>
+    </book>
+    <book>
+        <Title>Educated</Title>
+        <Author>Tara Westover</Author>
+        <Genre>Memoir</Genre>
+        <Stock>37</Stock>
+        <Year>2019</Year>
+        <Price>222.0</Price>
+    </book>
+    <book>
+        <Title>Eat, Pray, Love Made Me Do It</Title>
+        <Author>Elizabeth Gilbert</Author>
+        <Genre>Biography</Genre>
+        <Stock>72</Stock>
+        <Year>2016</Year>
+        <Price>443.0</Price>
+    </book>
+    <book>
+        <Title>Emma</Title>
+        <Author>Jane Austen</Author>
+        <Genre>Fiction</Genre>
+        <Stock>85</Stock>
+        <Year>1815</Year>
+        <Price>198.0</Price>
+    </book>
+    <book>
+        <Title>Eragon, Eldest, Brisingr</Title>
+        <Author>Christopher Paolini</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>54</Stock>
+        <Year>2002</Year>
+        <Price>387.0</Price>
+    </book>
+    <book>
+        <Title>Ender Game. Battle school</Title>
+        <Author>Orson Scott Card</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>32</Stock>
+        <Year>2009</Year>
+        <Price>320.0</Price>
+    </book>
+    <book>
+        <Title>Eleanor &amp; Park</Title>
+        <Author>Rainbow Rowell</Author>
+        <Genre>Romance</Genre>
+        <Stock>93</Stock>
+        <Year>2013</Year>
+        <Price>389.0</Price>
+    </book>
+    <book>
+        <Title>Extremely Loud and Incredibly Close</Title>
+        <Author>Jonathan Safran Foer</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>16</Stock>
+        <Year>2005</Year>
+        <Price>193.0</Price>
+    </book>
+    <book>
+        <Title>Everything I Never Told You</Title>
+        <Author>Celeste Ng</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>22</Stock>
+        <Year>2014</Year>
+        <Price>177.0</Price>
+    </book>
+    <book>
+        <Title>Fahrenheit 451</Title>
+        <Author>Ray Bradbury</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>4</Stock>
+        <Year>2010</Year>
+        <Price>307.0</Price>
+    </book>
+    <book>
+        <Title>Fragile Things</Title>
+        <Author>Neil Gaiman</Author>
+        <Genre>Short Stories</Genre>
+        <Stock>61</Stock>
+        <Year>2021</Year>
+        <Price>349.0</Price>
+    </book>
+    <book>
+        <Title>Flowers for Algernon</Title>
+        <Author>Daniel Keyes</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>3</Stock>
+        <Year>1966</Year>
+        <Price>400.0</Price>
+    </book>
+    <book>
+        <Title>Finding Audrey</Title>
+        <Author>Sophie Kinsella</Author>
+        <Genre>Young Adult Fiction</Genre>
+        <Stock>55</Stock>
+        <Year>2015</Year>
+        <Price>476.0</Price>
+    </book>
+    <book>
+        <Title>For Whom the Bell Tolls</Title>
+        <Author>Ernest Hemingway</Author>
+        <Genre>War Novel</Genre>
+        <Stock>82</Stock>
+        <Year>1940</Year>
+        <Price>499.0</Price>
+    </book>
+    <book>
+        <Title>Freedom</Title>
+        <Author>Jonathan Franzen</Author>
+        <Genre>Literary Fiction</Genre>
+        <Stock>71</Stock>
+        <Year>2010</Year>
+        <Price>204.0</Price>
+    </book>
+    <book>
+        <Title>Good Omens</Title>
+        <Author>Neil Gaiman, Terry Pratchett</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>8</Stock>
+        <Year>1990</Year>
+        <Price>152.0</Price>
+    </book>
+    <book>
+        <Title>Goodnight Moon</Title>
+        <Author>Margaret Wise Brown</Author>
+        <Genre>Children Fiction</Genre>
+        <Stock>26</Stock>
+        <Year>1947</Year>
+        <Price>212.0</Price>
+    </book>
+    <book>
+        <Title>Great Expectations</Title>
+        <Author>Charles Dickens</Author>
+        <Genre>Classic Fiction</Genre>
+        <Stock>54</Stock>
+        <Year>1861</Year>
+        <Price>258.0</Price>
+    </book>
+    <book>
+        <Title>Gone with the Wind</Title>
+        <Author>Margaret Mitchell</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>50</Stock>
+        <Year>1936</Year>
+        <Price>368.0</Price>
+    </book>
+    <book>
+        <Title>Fallen</Title>
+        <Author>Lauren Kate</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>66</Stock>
+        <Year>2009</Year>
+        <Price>169.0</Price>
+    </book>
+    <book>
+        <Title>Green Eggs and Ham</Title>
+        <Author>Dr. Seuss</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>4</Stock>
+        <Year>1960</Year>
+        <Price>472.0</Price>
+    </book>
+    <book>
+        <Title>Germinal</Title>
+        <Author>Emile Zola</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>34</Stock>
+        <Year>1885</Year>
+        <Price>356.0</Price>
+    </book>
+    <book>
+        <Title>Ghosts</Title>
+        <Author>Ibsen Henrik</Author>
+        <Genre>Drama</Genre>
+        <Stock>73</Stock>
+        <Year>1881</Year>
+        <Price>223.0</Price>
+    </book>
+    <book>
+        <Title>Harry Potter and the Sorcerer Stone</Title>
+        <Author>J.K. Rowling</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>20</Stock>
+        <Year>1997</Year>
+        <Price>334.0</Price>
+    </book>
+    <book>
+        <Title>H is for Hawk</Title>
+        <Author>Helen Macdonald</Author>
+        <Genre>Memoir</Genre>
+        <Stock>39</Stock>
+        <Year>2014</Year>
+        <Price>442.0</Price>
+    </book>
+    <book>
+        <Title>High Fidelity</Title>
+        <Author>Nick Hornby</Author>
+        <Genre>Romantic Comedy</Genre>
+        <Stock>2</Stock>
+        <Year>1995</Year>
+        <Price>498.0</Price>
+    </book>
+    <book>
+        <Title>Heart of Darkness</Title>
+        <Author>Joseph Conrad</Author>
+        <Genre>Classic Fiction</Genre>
+        <Stock>81</Stock>
+        <Year>1899</Year>
+        <Price>474.0</Price>
+    </book>
+    <book>
+        <Title>Hard Times</Title>
+        <Author>Charles Dickens</Author>
+        <Genre>Classic Fiction</Genre>
+        <Stock>17</Stock>
+        <Year>1854</Year>
+        <Price>360.0</Price>
+    </book>
+    <book>
+        <Title>Hillbilly Elegy</Title>
+        <Author>J.D. Vance</Author>
+        <Genre>Memoir</Genre>
+        <Stock>88</Stock>
+        <Year>2016</Year>
+        <Price>465.0</Price>
+    </book>
+    <book>
+        <Title>I Am Malala</Title>
+        <Author>Malala Yousafzai</Author>
+        <Genre>Biography</Genre>
+        <Stock>89</Stock>
+        <Year>2013</Year>
+        <Price>478.0</Price>
+    </book>
+    <book>
+        <Title>I am Number Four</Title>
+        <Author>Pitacuss Lore</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>56</Stock>
+        <Year>2010</Year>
+        <Price>287.0</Price>
+    </book>
+    <book>
+        <Title>If Beale Street Could Talk</Title>
+        <Author>James Baldwin</Author>
+        <Genre>African American Literature</Genre>
+        <Stock>96</Stock>
+        <Year>1974</Year>
+        <Price>498.0</Price>
+    </book>
+    <book>
+        <Title>I Heart Paris</Title>
+        <Author>Lindsey Kelk</Author>
+        <Genre>Chick Lit</Genre>
+        <Stock>75</Stock>
+        <Year>2010</Year>
+        <Price>483.0</Price>
+    </book>
+    <book>
+        <Title>In Cold Blood</Title>
+        <Author>Truman Capote</Author>
+        <Genre>True Crime</Genre>
+        <Stock>70</Stock>
+        <Year>1966</Year>
+        <Price>316.0</Price>
+    </book>
+    <book>
+        <Title>Invisible Cities</Title>
+        <Author>Italo Calvino</Author>
+        <Genre>Magical Realism</Genre>
+        <Stock>40</Stock>
+        <Year>1972</Year>
+        <Price>257.0</Price>
+    </book>
+    <book>
+        <Title>Invisible Man</Title>
+        <Author>Ralph Ellison</Author>
+        <Genre>Fiction</Genre>
+        <Stock>99</Stock>
+        <Year>1952</Year>
+        <Price>386.0</Price>
+    </book>
+    <book>
+        <Title>It</Title>
+        <Author>Stephen King</Author>
+        <Genre>Horror</Genre>
+        <Stock>98</Stock>
+        <Year>1986</Year>
+        <Price>424.0</Price>
+    </book>
+    <book>
+        <Title>Jane Eyre</Title>
+        <Author>Charlotte Bronte</Author>
+        <Genre>Romance</Genre>
+        <Stock>52</Stock>
+        <Year>1847</Year>
+        <Price>203.0</Price>
+    </book>
+    <book>
+        <Title>Jitterbug Perfume</Title>
+        <Author>Tom Robbins</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>99</Stock>
+        <Year>1984</Year>
+        <Price>392.0</Price>
+    </book>
+    <book>
+        <Title>Jonathan Livingston Seagull</Title>
+        <Author>Richard Bach</Author>
+        <Genre>Inspirational</Genre>
+        <Stock>5</Stock>
+        <Year>1970</Year>
+        <Price>209.0</Price>
+    </book>
+    <book>
+        <Title>Killing Lincoln</Title>
+        <Author>Martin Dugard</Author>
+        <Genre>History</Genre>
+        <Stock>33</Stock>
+        <Year>2011</Year>
+        <Price>265.0</Price>
+    </book>
+    <book>
+        <Title>Kim</Title>
+        <Author>Rudyard Kipling</Author>
+        <Genre>Adventure</Genre>
+        <Stock>368</Stock>
+        <Year>1901</Year>
+        <Price>316.0</Price>
+    </book>
+    <book>
+        <Title>Kite Runner</Title>
+        <Author>Khaled Hosseini</Author>
+        <Genre>Drama</Genre>
+        <Stock>372</Stock>
+        <Year>2003</Year>
+        <Price>480.0</Price>
+    </book>
+    <book>
+        <Title>Kitchen Confidential</Title>
+        <Author>Anthony Bourdain</Author>
+        <Genre>Memoir</Genre>
+        <Stock>312</Stock>
+        <Year>2000</Year>
+        <Price>240.0</Price>
+    </book>
+    <book>
+        <Title>Lady Chatterley Lover</Title>
+        <Author>D.H. Lawrence</Author>
+        <Genre>Romance</Genre>
+        <Stock>368</Stock>
+        <Year>1928</Year>
+        <Price>286.0</Price>
+    </book>
+    <book>
+        <Title>Les Miserables</Title>
+        <Author>Victor Hugo</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>1488</Stock>
+        <Year>1862</Year>
+        <Price>450.0</Price>
+    </book>
+    <book>
+        <Title>Life of Pi</Title>
+        <Author>Yann Martel</Author>
+        <Genre>Philosophical Fiction</Genre>
+        <Stock>326</Stock>
+        <Year>2001</Year>
+        <Price>171.0</Price>
+    </book>
+    <book>
+        <Title>Liar Poker</Title>
+        <Author>Michael Lewis</Author>
+        <Genre>Non-fiction</Genre>
+        <Stock>256</Stock>
+        <Year>1989</Year>
+        <Price>258.0</Price>
+    </book>
+    <book>
+        <Title>Lolita</Title>
+        <Author>Vladimir Nabokov</Author>
+        <Genre>Classics</Genre>
+        <Stock>336</Stock>
+        <Year>1955</Year>
+        <Price>334.0</Price>
+    </book>
+    <book>
+        <Title>Lorna Doone</Title>
+        <Author>R.D. Blackmore</Author>
+        <Genre>Romance</Genre>
+        <Stock>688</Stock>
+        <Year>1869</Year>
+        <Price>260.0</Price>
+    </book>
+    <book>
+        <Title>Like Water for Chocolate</Title>
+        <Author>Laura Esquivel</Author>
+        <Genre>Magical Realism</Genre>
+        <Stock>254</Stock>
+        <Year>1989</Year>
+        <Price>197.0</Price>
+    </book>
+    <book>
+        <Title>Little Women</Title>
+        <Author>Louisa May Alcott</Author>
+        <Genre>Classics</Genre>
+        <Stock>759</Stock>
+        <Year>1868</Year>
+        <Price>154.0</Price>
+    </book>
+    <book>
+        <Title>Love Medicine</Title>
+        <Author>Louise Erdrich</Author>
+        <Genre>Native American Literature</Genre>
+        <Stock>366</Stock>
+        <Year>1984</Year>
+        <Price>475.0</Price>
+    </book>
+    <book>
+        <Title>Love in the Time of Cholera</Title>
+        <Author>Gabriel Garcia Marquez</Author>
+        <Genre>Romance, Fiction</Genre>
+        <Stock>368</Stock>
+        <Year>1985</Year>
+        <Price>483.0</Price>
+    </book>
+    <book>
+        <Title>Lord of the Flies</Title>
+        <Author>William Golding</Author>
+        <Genre>Fiction, Allegory</Genre>
+        <Stock>224</Stock>
+        <Year>1954</Year>
+        <Price>417.0</Price>
+    </book>
+    <book>
+        <Title>Madame Tussaud</Title>
+        <Author>Michelle Moran</Author>
+        <Genre>Literary Fiction</Genre>
+        <Stock>464</Stock>
+        <Year>2011</Year>
+        <Price>434.0</Price>
+    </book>
+    <book>
+        <Title>Maggot Moon</Title>
+        <Author>Sally Gardner</Author>
+        <Genre>Young Adults</Genre>
+        <Stock>287</Stock>
+        <Year>2012</Year>
+        <Price>228.0</Price>
+    </book>
+    <book>
+        <Title>Magyk</Title>
+        <Author>Angie Sage</Author>
+        <Genre>Sci-Fi</Genre>
+        <Stock>576</Stock>
+        <Year>2005</Year>
+        <Price>156.0</Price>
+    </book>
+    <book>
+        <Title>Major Pettigrew Last Stand</Title>
+        <Author>Helen Simonson</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>384</Stock>
+        <Year>2010</Year>
+        <Price>293.0</Price>
+    </book>
+    <book>
+        <Title>Mockingjay</Title>
+        <Author>Suzanne Collins</Author>
+        <Genre>Dystopia</Genre>
+        <Stock>389</Stock>
+        <Year>2010</Year>
+        <Price>365.0</Price>
+    </book>
+    <book>
+        <Title>Mudbound</Title>
+        <Author>Hillary Jordan</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>368</Stock>
+        <Year>2009</Year>
+        <Price>321.0</Price>
+    </book>
+    <book>
+        <Title>Music of the Ghosts</Title>
+        <Author>Vaddey Ratner</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>352</Stock>
+        <Year>2018</Year>
+        <Price>356.0</Price>
+    </book>
+    <book>
+        <Title>Natural Born Charmer</Title>
+        <Author>Susan Elizabeth Philips</Author>
+        <Genre>Romance</Genre>
+        <Stock>400</Stock>
+        <Year>2007</Year>
+        <Price>154.0</Price>
+    </book>
+    <book>
+        <Title>New Moon</Title>
+        <Author>Stephenie Meyer</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>563</Stock>
+        <Year>2006</Year>
+        <Price>454.0</Price>
+    </book>
+    <book>
+        <Title>Night</Title>
+        <Author>Elie Wiesel</Author>
+        <Genre>History</Genre>
+        <Stock>245</Stock>
+        <Year>2006</Year>
+        <Price>476.0</Price>
+    </book>
+    <book>
+        <Title>Nimona</Title>
+        <Author>N.D. Stevenson</Author>
+        <Genre>Graphic Novel</Genre>
+        <Stock>272</Stock>
+        <Year>2015</Year>
+        <Price>358.0</Price>
+    </book>
+    <book>
+        <Title>Normal People</Title>
+        <Author>Sally Rooney</Author>
+        <Genre>Romance</Genre>
+        <Stock>266</Stock>
+        <Year>2018</Year>
+        <Price>236.0</Price>
+    </book>
+    <book>
+        <Title>Northanger Abbey</Title>
+        <Author>Jane Austen</Author>
+        <Genre>Classics</Genre>
+        <Stock>260</Stock>
+        <Year>1817</Year>
+        <Price>230.0</Price>
+    </book>
+    <book>
+        <Title>Oblomov</Title>
+        <Author>Ivan Goncharov</Author>
+        <Genre>Classics</Genre>
+        <Stock>586</Stock>
+        <Year>1859</Year>
+        <Price>414.0</Price>
+    </book>
+    <book>
+        <Title>Obsidian</Title>
+        <Author>Jennifer L. Armentrout</Author>
+        <Genre>Young Adults</Genre>
+        <Stock>333</Stock>
+        <Year>2011</Year>
+        <Price>359.0</Price>
+    </book>
+    <book>
+        <Title>Oedipus Rex</Title>
+        <Author>Sophocles</Author>
+        <Genre>Classics</Genre>
+        <Stock>64</Stock>
+        <Year>1991</Year>
+        <Price>188.0</Price>
+    </book>
+    <book>
+        <Title>Olivia</Title>
+        <Author>Ian Falconer</Author>
+        <Genre>Picture Books</Genre>
+        <Stock>33</Stock>
+        <Year>2044</Year>
+        <Price>173.0</Price>
+    </book>
+    <book>
+        <Title>Ordinary People</Title>
+        <Author>Judith Guest</Author>
+        <Genre>Fiction</Genre>
+        <Stock>263</Stock>
+        <Year>1976</Year>
+        <Price>394.0</Price>
+    </book>
+    <book>
+        <Title>Oryx and Crake</Title>
+        <Author>Margaret Atwood</Author>
+        <Genre>Fiction</Genre>
+        <Stock>387</Stock>
+        <Year>2003</Year>
+        <Price>407.0</Price>
+    </book>
+    <book>
+        <Title>Our Mutual Friend</Title>
+        <Author>Charles Dickens</Author>
+        <Genre>Classics</Genre>
+        <Stock>880</Stock>
+        <Year>200</Year>
+        <Price>244.0</Price>
+    </book>
+    <book>
+        <Title>Our Town</Title>
+        <Author>Thornton Wilder</Author>
+        <Genre>Classics</Genre>
+        <Stock>181</Stock>
+        <Year>1938</Year>
+        <Price>453.0</Price>
+    </book>
+    <book>
+        <Title>Pachinko</Title>
+        <Author>Min Jin Lee</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>544</Stock>
+        <Year>2017</Year>
+        <Price>447.0</Price>
+    </book>
+    <book>
+        <Title>Pageant</Title>
+        <Author>Lilith Vincent</Author>
+        <Genre>Romance</Genre>
+        <Stock>346</Stock>
+        <Year>2022</Year>
+        <Price>441.0</Price>
+    </book>
+    <book>
+        <Title>Peter Pan</Title>
+        <Author>J.M. Barrie</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>176</Stock>
+        <Year>1911</Year>
+        <Price>199.0</Price>
+    </book>
+    <book>
+        <Title>Philoctetes</Title>
+        <Author>Sophocles</Author>
+        <Genre>Classics</Genre>
+        <Stock>128</Stock>
+        <Year>2003</Year>
+        <Price>444.0</Price>
+    </book>
+    <book>
+        <Title>Poetics</Title>
+        <Author>Aristotle</Author>
+        <Genre>Philosophy</Genre>
+        <Stock>62</Stock>
+        <Year>1961</Year>
+        <Price>234.0</Price>
+    </book>
+    <book>
+        <Title>Politics</Title>
+        <Author>Aristotle</Author>
+        <Genre>Philosophy</Genre>
+        <Stock>368</Stock>
+        <Year>2000</Year>
+        <Price>194.0</Price>
+    </book>
+    <book>
+        <Title>Pompeii</Title>
+        <Author>Robert Harris</Author>
+        <Genre>Historical Fiction</Genre>
+        <Stock>274</Stock>
+        <Year>2003</Year>
+        <Price>318.0</Price>
+    </book>
+    <book>
+        <Title>Pride and Prejudice</Title>
+        <Author>Jane Austen</Author>
+        <Genre>Fiction</Genre>
+        <Stock>279</Stock>
+        <Year>1813</Year>
+        <Price>239.0</Price>
+    </book>
+    <book>
+        <Title>Quiet</Title>
+        <Author>Susan Cain</Author>
+        <Genre>Nonfiction</Genre>
+        <Stock>333</Stock>
+        <Year>2012</Year>
+        <Price>413.0</Price>
+    </book>
+    <book>
+        <Title>Quidditch Through the Ages</Title>
+        <Author>J.K. Rowling</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>56</Stock>
+        <Year>2001</Year>
+        <Price>318.0</Price>
+    </book>
+    <book>
+        <Title>Queen of Shadows</Title>
+        <Author>Sarah J. Maas</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>672</Stock>
+        <Year>2016</Year>
+        <Price>428.0</Price>
+    </book>
+    <book>
+        <Title>Quicksand</Title>
+        <Author>Nella Larsen</Author>
+        <Genre>Fiction</Genre>
+        <Stock>160</Stock>
+        <Year>1928</Year>
+        <Price>394.0</Price>
+    </book>
+    <book>
+        <Title>Quo Vadis</Title>
+        <Author>Henryk Sienkiewicz</Author>
+        <Genre>Historical novel</Genre>
+        <Stock>589</Stock>
+        <Year>1895</Year>
+        <Price>387.0</Price>
+    </book>
+    <book>
+        <Title>Queen Lucia</Title>
+        <Author>E.F. Benson</Author>
+        <Genre>Classics</Genre>
+        <Stock>188</Stock>
+        <Year>1920</Year>
+        <Price>484.0</Price>
+    </book>
+    <book>
+        <Title>Quarantine</Title>
+        <Author>Jim Crace</Author>
+        <Genre>Fiction</Genre>
+        <Stock>242</Stock>
+        <Year>1999</Year>
+        <Price>320.0</Price>
+    </book>
+    <book>
+        <Title>Q-Squared</Title>
+        <Author>Peter David</Author>
+        <Genre>Science Fiction</Genre>
+        <Stock>448</Stock>
+        <Year>1995</Year>
+        <Price>384.0</Price>
+    </book>
+    <book>
+        <Title>Rebecca</Title>
+        <Author>Daphne du Maurier</Author>
+        <Genre>Literary Fiction</Genre>
+        <Stock>456</Stock>
+        <Year>1938</Year>
+        <Price>215.0</Price>
+    </book>
+    <book>
+        <Title>Romeo and Juliet</Title>
+        <Author>William Shakespeare</Author>
+        <Genre>Romance</Genre>
+        <Stock>240</Stock>
+        <Year>1599</Year>
+        <Price>360.0</Price>
+    </book>
+    <book>
+        <Title>Robinson Crusoe</Title>
+        <Author>Daniel Dafoe</Author>
+        <Genre>Adventure</Genre>
+        <Stock>288</Stock>
+        <Year>1719</Year>
+        <Price>493.0</Price>
+    </book>
+    <book>
+        <Title>Ready Player One</Title>
+        <Author>lsErnest Cline</Author>
+        <Genre>Science fiction</Genre>
+        <Stock>384</Stock>
+        <Year>2012</Year>
+        <Price>194.0</Price>
+    </book>
+    <book>
+        <Title>Room</Title>
+        <Author>Emma Donoghue</Author>
+        <Genre>Fiction</Genre>
+        <Stock>352</Stock>
+        <Year>2011</Year>
+        <Price>290.0</Price>
+    </book>
+    <book>
+        <Title>Regency Buck</Title>
+        <Author>Georgette Heyer</Author>
+        <Genre>Literary Fiction</Genre>
+        <Stock>300</Stock>
+        <Year>1967</Year>
+        <Price>263.0</Price>
+    </book>
+    <book>
+        <Title>Redwall</Title>
+        <Author>Brian Jacques</Author>
+        <Genre>Children book</Genre>
+        <Stock>352</Stock>
+        <Year>2002</Year>
+        <Price>170.0</Price>
+    </book>
+    <book>
+        <Title>Sense and Sensibility</Title>
+        <Author>Jane Austen</Author>
+        <Genre>Literary fiction</Genre>
+        <Stock>367</Stock>
+        <Year>1811</Year>
+        <Price>357.0</Price>
+    </book>
+    <book>
+        <Title>Shiver</Title>
+        <Author>Maggie Stiefvater</Author>
+        <Genre>Young adult</Genre>
+        <Stock>416</Stock>
+        <Year>2014</Year>
+        <Price>389.0</Price>
+    </book>
+    <book>
+        <Title>Shadow Kiss</Title>
+        <Author>Richelle Mead</Author>
+        <Genre>Young adult</Genre>
+        <Stock>448</Stock>
+        <Year>2008</Year>
+        <Price>158.0</Price>
+    </book>
+    <book>
+        <Title>Slaughterhouse Five</Title>
+        <Author>Kurt Vonnegut</Author>
+        <Genre>Literary fiction</Genre>
+        <Stock>288</Stock>
+        <Year>1999</Year>
+        <Price>353.0</Price>
+    </book>
+    <book>
+        <Title>Shakespear Sonnets</Title>
+        <Author>William Shakespeare</Author>
+        <Genre>Poetry</Genre>
+        <Stock>432</Stock>
+        <Year>2004</Year>
+        <Price>498.0</Price>
+    </book>
+    <book>
+        <Title>Stuart Little</Title>
+        <Author>E.B. White</Author>
+        <Genre>Children book</Genre>
+        <Stock>130</Stock>
+        <Year>2020</Year>
+        <Price>341.0</Price>
+    </book>
+    <book>
+        <Title>Stuart Little 2</Title>
+        <Author>Patricia Lakin</Author>
+        <Genre>Children book</Genre>
+        <Stock>32</Stock>
+        <Year>2002</Year>
+        <Price>372.0</Price>
+    </book>
+    <book>
+        <Title>The Jungle Book</Title>
+        <Author>Rudyard Kipling</Author>
+        <Genre>Classics</Genre>
+        <Stock>191</Stock>
+        <Year>2013</Year>
+        <Price>207.0</Price>
+    </book>
+    <book>
+        <Title>The Little Mermaid</Title>
+        <Author>Hans Christian Andersen</Author>
+        <Genre>Classics</Genre>
+        <Stock>30</Stock>
+        <Year>2016</Year>
+        <Price>285.0</Price>
+    </book>
+    <book>
+        <Title>The Bad Decisions Playlist</Title>
+        <Author>Michael Rubens</Author>
+        <Genre>Young adult</Genre>
+        <Stock>302</Stock>
+        <Year>2016</Year>
+        <Price>214.0</Price>
+    </book>
+    <book>
+        <Title>The Hitchhiker Guide to the Galaxy</Title>
+        <Author>Douglas Adams</Author>
+        <Genre>Science fiction</Genre>
+        <Stock>223</Stock>
+        <Year>1995</Year>
+        <Price>398.0</Price>
+    </book>
+    <book>
+        <Title>The Selection</Title>
+        <Author>Kiera Cass</Author>
+        <Genre>Young adult</Genre>
+        <Stock>352</Stock>
+        <Year>2013</Year>
+        <Price>169.0</Price>
+    </book>
+    <book>
+        <Title>The Familiar Volume 1</Title>
+        <Author>Mark Z. Danielewski</Author>
+        <Genre>Literary Fiction</Genre>
+        <Stock>880</Stock>
+        <Year>2015</Year>
+        <Price>166.0</Price>
+    </book>
+    <book>
+        <Title>The Great Gatsby</Title>
+        <Author>F. Scott Fitzgerald</Author>
+        <Genre>Classics</Genre>
+        <Stock>180</Stock>
+        <Year>2004</Year>
+        <Price>289.0</Price>
+    </book>
+    <book>
+        <Title>Twilight</Title>
+        <Author>Stephenie Meyer</Author>
+        <Genre>Fantasy</Genre>
+        <Stock>544</Stock>
+        <Year>2006</Year>
+        <Price>492.0</Price>
+    </book>
+    <book>
+        <Title>Call Me by Your Name</Title>
+        <Author>Andre Aciman</Author>
+        <Genre>Romance</Genre>
+        <Stock>255</Stock>
+        <Year>2007</Year>
+        <Price>319.0</Price>
+    </book>
+    <book>
+        <Title>Noli Me Tangere</Title>
+        <Author>Jose Rizal</Author>
+        <Genre>Romance</Genre>
+        <Stock>480</Stock>
+        <Year>1995</Year>
+        <Price>165.0</Price>
+    </book>
+</books>

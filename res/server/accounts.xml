@@ -1,3 +1,37 @@
 <accounts>
-
+    <user>
+        <username>filine</username>
+        <password>joen</password>
+        <accountType>Buyer</accountType>
+    </user>
+    <user>
+        <username>jewel</username>
+        <password>santoyo</password>
+        <accountType>Buyer</accountType>
+    </user>
+    <user>
+        <username>fiona</username>
+        <password>fatima</password>
+        <accountType>Buyer</accountType>
+    </user>
+    <user>
+        <username>john</username>
+        <password>andrew</password>
+        <accountType>Buyer</accountType>
+    </user>
+    <user>
+        <username>julianna</username>
+        <password>raine</password>
+        <accountType>Buyer</accountType>
+    </user>
+    <user>
+        <username>michael</username>
+        <password>justine</password>
+        <accountType>Buyer</accountType>
+    </user>
+    <user>
+        <username>admin</username>
+        <password>1234</password>
+        <accountType>Book Owner</accountType>
+    </user>
 </accounts>

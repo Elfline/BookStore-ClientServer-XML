@@ -3,7 +3,6 @@ package client.owner.model;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import server.ServerConnection;
 import utilities.User;
 
 import javax.xml.parsers.DocumentBuilder;
