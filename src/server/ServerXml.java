@@ -347,9 +347,26 @@ public class ServerXml {
 
         Element root = doc.getDocumentElement();
 
+        // Check if a <user> element with the given username already exists
+        NodeList users = root.getElementsByTagName("user");
+        Element userElement = null;
+
+        for (int i = 0; i < users.getLength(); i++) {
+            Element existingUser = (Element) users.item(i);
+            if (existingUser.getAttribute("username").equals(username)) {
+                userElement = existingUser; // Found the existing <user> element
+                break;
+            }
+        }
+
+        // If no existing <user> found, create a new one
+        if (userElement == null) {
+            userElement = doc.createElement("user");
+            userElement.setAttribute("username", username);
+            root.appendChild(userElement);
+        }
+
         for (Transaction transaction : newTransactions) {
-            Element userElement = doc.createElement("user");
-            userElement.setAttribute("username", transaction.getUsername().equals(username));
 
             Element transactionElement = doc.createElement("transaction");
             appendChildElement(doc, transactionElement, "date", transaction.getDate());
@@ -360,12 +377,10 @@ public class ServerXml {
             appendChildElement(doc, transactionElement, "totalAmount", String.format("%.2f", transaction.getTotalAmount()));
 
             userElement.appendChild(transactionElement);
-            root.appendChild(userElement);
         }
 
         saveXmlDocument(doc, file);
 
-        // Now save sales correctly
         saveSales(newTransactions);
     }
 
