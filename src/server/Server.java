@@ -91,12 +91,24 @@ public class Server {
                                 sendTransactionsToUsers(loggedUser);
                                 System.out.println("[SERVER] Sent transaction history for: " + loggedUser);
                                 break;
+                            case "REMOVE_FAVORITES":
+                                String userFavorites = (String) input.readObject();
+                                Favorites favXml = (Favorites) input.readObject();
+                                boolean deleteFavorite = ServerXml.deleteFavoritesToXML(userFavorites, favXml);
+                                output.writeObject(deleteFavorite ? "SUCCESS" : "ERROR");
+                                if (deleteFavorite) {
+                                    System.out.println("[SERVER] Favorite book '" + favXml.getTitle() +"' is successfully deleted from user: " + userFavorites);
+                                }
+                                sendFavoritesToUsers(userFavorites);
+                                break;
                             case "ADD_FAVORITES":
                                 String usernameFavorites = (String) input.readObject();
-                                File favoritesXml = (File) input.readObject();
-                                System.out.println("[SERVER] Received favorites.xml from user: " + usernameFavorites);
-                                List<Favorites> favoritesList = ServerXml.loadFavorites(favoritesXml);
-                                ServerXml.saveFavorites(usernameFavorites, favoritesList);
+                                Favorites favoritesXml = (Favorites) input.readObject();
+                                boolean addFavorite = ServerXml.addFavoritesToXML(usernameFavorites, favoritesXml);
+                                output.writeObject(addFavorite ? "SUCCESS" : "ERROR");
+                                if (addFavorite) {
+                                    System.out.println("[SERVER] Favorite book '" + favoritesXml.getTitle() +"' is successfully added from user: " + usernameFavorites);
+                                }
                                 sendFavoritesToUsers(usernameFavorites);
                                 break;
                             case "FETCH_FAVORITES":
@@ -223,7 +235,7 @@ public class Server {
 
 
     /** Validates the user */
-    private static boolean handleUserValidation(File user) {
+    private static synchronized boolean handleUserValidation(File user) {
         List<User> serverUsers = ServerXml.loadUsers(); // Load server's copy
         List<User> clientUsers = ServerXml.loadUsersFromFile(user); // Load client's copy
 
@@ -244,7 +256,7 @@ public class Server {
     }
 
     /** Handles the user log out */
-    private static boolean handleUserLogout(User user) {
+    private static synchronized boolean handleUserLogout(User user) {
         if (user == null || user.getUsername() == null) {
             System.err.println("[DEBUG] Invalid logout request: User data is missing");
             return false;
@@ -319,7 +331,7 @@ public class Server {
     }
 
     /** Method for sending the books.xml to all users */
-    private static void sendBooksToUsers() {
+    private static synchronized void sendBooksToUsers() {
         File booksFile = new File(BOOKS_FILE);
 
         if (!booksFile.exists()) {

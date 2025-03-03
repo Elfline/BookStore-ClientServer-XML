@@ -12,18 +12,15 @@ public class Cart {
         this.price = price;
     }
 
-    // Getters
     public String getTitle() {
         return title;
     }
-
     public int getQuantity() {
         return quantity;
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
     public double getPrice() {
         return price;
     }

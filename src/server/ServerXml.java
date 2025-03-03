@@ -280,7 +280,7 @@ public class ServerXml {
 
             if (matchingBook != null) {
                 if (matchingBook.getStock() >= quantity) {
-                    System.out.println("[SERVER] " + quantity + " book/s of '" + title + "' successfully purchased by " + username);
+                    System.out.println("[SERVER] " + quantity + " book of '" + title + "' successfully purchased by " + username);
                     matchingBook.setStock(matchingBook.getStock() - quantity); // Reduce stock
 
                     // Calculate total for this book
@@ -304,7 +304,7 @@ public class ServerXml {
         saveBooks(books, bookXML);
         if (!transactions.isEmpty()) {
             saveTransactions(username, transactions);
-            saveSales();
+            saveSales(transactions);
         }
     }
 
@@ -331,7 +331,7 @@ public class ServerXml {
 
 
     /** Method for saving the transactions to transactions.xml */
-    public static void saveTransactions(List<Transaction> newTransactions) throws Exception {
+    public static void saveTransactions(String username, List<Transaction> newTransactions) throws Exception {
         File file = new File(TRANSACTIONS_FILE);
         Document doc;
 
@@ -349,7 +349,7 @@ public class ServerXml {
 
         for (Transaction transaction : newTransactions) {
             Element userElement = doc.createElement("user");
-            userElement.setAttribute("username", transaction.getUsername());
+            userElement.setAttribute("username", transaction.getUsername().equals(username));
 
             Element transactionElement = doc.createElement("transaction");
             appendChildElement(doc, transactionElement, "date", transaction.getDate());
@@ -424,16 +424,34 @@ public class ServerXml {
 
         return transactions;
     }
-
-
-    /** Method for saving sales to sales.xml */
-    public static synchronized void saveSales(List<Transaction> transactions) {
+    /** Method for daving the sales when there is a new transaction */
+    public static void saveSales(List<Transaction> transactions) {
         try {
             File transactionsFile = new File(TRANSACTIONS_FILE);
-            if (!transactionsFile.exists()) {
-                System.out.println("[DEBUG] transactions.xml file not found.");
+
+            if (!transactionsFile.exists() && (transactions == null || transactions.isEmpty())) {
+                System.out.println("[DEBUG] No transactions available for sales.xml");
                 return;
             }
+
+            List<Transaction> allTransactions = transactions;
+            if (transactionsFile.exists()) {
+                allTransactions.addAll(loadTransactions(transactionsFile));
+            }
+
+            // Process sales as before, using allTransactions
+            generateSalesReport(allTransactions);
+
+            System.out.println("[SERVER] sales.xml updated successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** Method for saving sales to sales.xml */
+    public static synchronized void generateSalesReport(List<Transaction> transactions) {
+        try {
+            File transactionsFile = new File(TRANSACTIONS_FILE);
 
             // Parse transactions.xml
             Document transactionsDoc = parseXml(transactionsFile);
@@ -525,7 +543,7 @@ public class ServerXml {
 
     /** Method for saving the favorites to favorites.xml */
     public static void saveFavorites(String username, List<Favorites> newFavorites) throws Exception {
-        System.out.println("[SERVER] Received favorites XML for user: " + username);
+        System.out.println("[SERVER] Received favorites XML from user: " + username);
 
         File file = new File(FAVORITE_FILE);
         Document doc;
@@ -533,6 +551,7 @@ public class ServerXml {
 
         if (file.exists() && file.length() > 0) {
             doc = parseXml(file);
+            root = doc.getDocumentElement();
         } else {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -616,5 +635,108 @@ public class ServerXml {
 
         return favorites;
     }
+
+    /** Method for adding the favorites list to the xml for a specified username */
+    public static boolean addFavoritesToXML(String username, Favorites addFavorite) {
+        try {
+            File file = new File(FAVORITE_FILE);
+            Document doc;
+            Element root;
+
+            if (file.exists() && file.length() > 0) {
+                doc = parseXml(file);
+                root = doc.getDocumentElement();
+            } else {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                doc = builder.newDocument();
+                root = doc.createElement("favorites");
+                doc.appendChild(root);
+            }
+
+            // Find user node
+            NodeList users = root.getElementsByTagName("user");
+            Element userElement = null;
+
+            for (int i = 0; i < users.getLength(); i++) {
+                Element user = (Element) users.item(i);
+                if (user.getAttribute("username").equals(username)) {
+                    userElement = user;
+                    break;
+                }
+            }
+
+            // If user doesn't exist, create a new one
+            if (userElement == null) {
+                userElement = doc.createElement("user");
+                userElement.setAttribute("username", username);
+                root.appendChild(userElement);
+            }
+
+            // Create new book element
+            Element bookElement = doc.createElement("book");
+            appendChildElement(doc, bookElement, "title", addFavorite.getTitle());
+            appendChildElement(doc, bookElement, "author", addFavorite.getAuthor());
+            appendChildElement(doc, bookElement, "year", addFavorite.getYear());
+            appendChildElement(doc, bookElement, "stock", String.valueOf(addFavorite.getStock()));
+
+            userElement.appendChild(bookElement);
+
+            saveXmlDocument(doc, file);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /** Method for deleting the favorites list to the xml for a specified username */
+    public static boolean deleteFavoritesToXML(String username, Favorites deleteFavorite) {
+        try {
+            File file = new File(FAVORITE_FILE);
+            if (!file.exists()) {
+                return false;
+            }
+
+            Document doc = parseXml(file);
+            Element root = doc.getDocumentElement();
+
+            NodeList users = root.getElementsByTagName("user");
+            Element userElement = null;
+
+            // Find user node
+            for (int i = 0; i < users.getLength(); i++) {
+                Element user = (Element) users.item(i);
+                if (user.getAttribute("username").equals(username)) {
+                    userElement = user;
+                    break;
+                }
+            }
+
+            // If user not found, return false
+            if (userElement == null) {
+                return false;
+            }
+
+            // Find the book to remove
+            NodeList books = userElement.getElementsByTagName("book");
+            for (int i = 0; i < books.getLength(); i++) {
+                Element book = (Element) books.item(i);
+                String title = book.getElementsByTagName("title").item(0).getTextContent();
+
+                if (title.equals(deleteFavorite.getTitle())) {
+                    userElement.removeChild(book);
+                    saveXmlDocument(doc, file);
+                    return true;
+                }
+            }
+
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }
