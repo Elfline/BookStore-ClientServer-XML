@@ -39,10 +39,6 @@ public class BookOwnerUpdateBookView extends JFrame {
         setVisible(true);
 
     }
-    public void setBookDetails(int stock, double price) {
-        stockField.setText(String.valueOf(stock));
-        priceField.setText(String.valueOf(price));
-    }
 
     public int getStockInput() {
         return Integer.parseInt(stockField.getText());
@@ -59,8 +55,13 @@ public class BookOwnerUpdateBookView extends JFrame {
     public JButton getCancelButton() {
         return cancelButton;
     }
+
+    public void setBookDetails(int stock, double price) {
+        stockField.setText(String.valueOf(stock));
+        priceField.setText(String.valueOf(price));
+    }
     public void clearFields() {
         stockField.setText("");
-        stockField.setText("");
+        priceField.setText("");
     }
 }

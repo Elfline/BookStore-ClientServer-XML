@@ -1,9 +1,7 @@
 package client.owner.view;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class BookOwnerAddBookView extends JFrame {
     private JTextField titleField, authorField, genreField, yearField, stockField, priceField;
@@ -70,5 +68,21 @@ public class BookOwnerAddBookView extends JFrame {
     }
     public JButton getCancelButton() {
         return cancelButton;
+    }
+    public void setBookDetails(String title, String author, String genre, String year, int stock, double price) {
+        titleField.setText(title);
+        authorField.setText(author);
+        genreField.setText(genre);
+        yearField.setText(year);
+        stockField.setText(String.valueOf(stock));
+        priceField.setText(String.valueOf(price));
+    }
+    public void clearFields() {
+        titleField.setText("");
+        authorField.setText("");
+        genreField.setText("");
+        yearField.setText("");
+        stockField.setText("");
+        priceField.setText("");
     }
 }

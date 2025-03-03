@@ -16,10 +16,12 @@ public class BookOwnerSalesModel {
     BookOwnerModel model;
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 2000;
+    private ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
     private Map<String, Double> revenueByMonth = new HashMap<>();
 
 
-    public BookOwnerSalesModel(client.bookowner.model.BookOwnerModel model) {
+    public BookOwnerSalesModel(BookOwnerModel model) {
         transactions = new ArrayList<>();
         this.model = model;
         initializeConnection();

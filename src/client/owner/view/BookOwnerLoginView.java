@@ -10,8 +10,7 @@ public class BookOwnerLoginView extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
-    private JLabel statusLabel;
-    private JComboBox<String> accountTypeComboBox;
+    private JLabel statusLabel, accountTypeLabel;
     private JCheckBox showPasswordCheckBox;
 
     public BookOwnerLoginView() {
@@ -25,23 +24,16 @@ public class BookOwnerLoginView extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);  // Add some padding between components
 
-        // Username label and text field
         JLabel usernameLabel = new JLabel("Username:");
         usernameField = new JTextField(20);
 
-        // Password label and text field
         JLabel passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField(20);
 
-        // Account type label and combo box
-        JLabel accountTypeLabel = new JLabel("Account Type:");
-        accountTypeComboBox = new JComboBox<>(new String[] {"Book Owner"});
-
-        // Buttons
         loginButton = new JButton("Login");
 
-        // Status label to display messages
         statusLabel = new JLabel(" ");
+        accountTypeLabel = new JLabel("Book Owner");
 
         // Show Password checkbox
         showPasswordCheckBox = new JCheckBox("Show Password");
@@ -77,8 +69,7 @@ public class BookOwnerLoginView extends JFrame {
         add(showPasswordCheckBox, gbc);
 
         gbc.gridx = 1; gbc.gridy = 3;
-        add(accountTypeComboBox, gbc);
-
+        add(accountTypeLabel, gbc);
 
         gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
         add(loginButton, gbc);
@@ -99,7 +90,7 @@ public class BookOwnerLoginView extends JFrame {
     }
 
     public String getAccountType() {
-        return (String) accountTypeComboBox.getSelectedItem();
+        return accountTypeLabel.getText();
     }
 
     public void setStatusMessage(String message) {
@@ -109,12 +100,10 @@ public class BookOwnerLoginView extends JFrame {
     public void addLoginListener(ActionListener listener) {
         loginButton.addActionListener(listener);
     }
-    /**
-     * Clears all input fields and resets the login panel to its initial state.
-     */
+
     public void clearFields() {
-        usernameField.setText(""); // Clear the username field
-        passwordField.setText(""); // Clear the password field
+        usernameField.setText("");
+        passwordField.setText("");
         passwordField.setEchoChar('*');
     }
 }

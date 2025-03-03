@@ -2,7 +2,7 @@ package client.owner.controller;
 
 import client.owner.model.*;
 import client.owner.view.*;
-import client.buyer.model.BookOwnerLoginModel;
+import client.buyer.model.*;
 import utilities.Book;
 
 import javax.swing.*;
@@ -113,7 +113,7 @@ public class BookOwnerController {
 
         String selectedBookTitle = model.getSelectedBook().getTitle();
         BookOwnerDeleteBookView deleteBookView = new BookOwnerDeleteBookView(selectedBookTitle); // 🔹 Pass title here
-        client.bookowner.model.BookOwnerDeleteBookModel deleteBookModel = new client.bookowner.model.BookOwnerDeleteBookModel(model);
+        BookOwnerDeleteBookModel deleteBookModel = new BookOwnerDeleteBookModel(model);
         new BookOwnerDeleteBookController(deleteBookView, deleteBookModel, this);
 
         deleteBookView.setVisible(true);

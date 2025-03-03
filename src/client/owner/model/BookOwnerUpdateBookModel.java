@@ -6,18 +6,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookOwnerUpdateBookModel {
-    private client.bookowner.model.BookOwnerModel model;
+    private static final String SERVER_HOST = "localhost";
+    private static final int SERVER_PORT = 2000;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
     private Socket socket;
     private Book bookToUpdate;
-    private List<Book> books = new ArrayList<>();
+    BookOwnerModel model;
 
-    public BookOwnerUpdateBookModel(client.bookowner.model.BookOwnerModel model) {
+    public BookOwnerUpdateBookModel(BookOwnerModel model) {
         this.model = model;
         this.bookToUpdate = model.getSelectedBook(); // Get selected book from BookOwnerModel
         if (bookToUpdate != null) {
@@ -66,7 +65,7 @@ public class BookOwnerUpdateBookModel {
 
     private void initializeConnection() {
         try {
-            socket = new Socket("localhost", 2000);
+            socket = new Socket(SERVER_HOST, SERVER_PORT);
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {

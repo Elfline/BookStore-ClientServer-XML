@@ -17,6 +17,7 @@ public class BookOwnerAddBookController {
         this.model = model;
         this.mainController = mainController;
 
+        view.setBookDetails(model.getBookStock(), model.getBookPrice());
         this.view.getAddButton().addActionListener(new AddBookListener());
         this.view.getCancelButton().addActionListener(e -> view.dispose());
     }

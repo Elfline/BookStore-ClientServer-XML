@@ -1,24 +1,6 @@
-/**
- * BookStoreModel represents the data model for the book store application.
- * It manages the list of available books and provides methods to access and manipulate the book data.
- *
- * Algorithm:
- * 1. Load Books:
- *    - Read book data from the "books.xml" file.
- *    - Parse the XML file to extract book information (title, author, genre, year, stock, price).
- *    - Create BookUtility objects for each book and store them in the `bookInventory` list.
- * 2. Get Book Inventory:
- *    - Return a copy of the `bookInventory` list to prevent external modifications.
- * 3. Search Books:
- *    - Create an empty list to store search results.
- *    - Iterate through the `bookInventory`.
- *    - Check if the search term (case-insensitive) is present in the book's title, author, or genre.
- *    - If a match is found, add the book to the results list.
- *    - Return the list of matching books.
- */
 package client.buyer.model;
 
-import utilities.BookUtility;
+import utilities.Book;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.*;
@@ -27,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookStoreModel {
-    private List<BookUtility> bookInventory = new ArrayList<>();
+    private List<Book> bookInventory = new ArrayList<>();
 
 
     // Load Books from XML

@@ -9,16 +9,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class BookOwnerModel {
+    private static final String LOGOUT_FILE = "res/client/owner/logout.xml";
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 2000;
+    private ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
     private List<Book> books;
     private Book selectedBook;
     private Runnable updateCallback; // This will notify the GUI when books are updated
-    private static final String BOOKS_FILE = "res/books.xml";
 
     public BookOwnerModel() {
         System.out.println("[CLIENT] Requesting the books data from server...");
-        this.books = ServerXml.readBooksFromXML(BOOKS_FILE);
         requestBooksFromServer();
     }
     public void setUpdateCallback(Runnable callback) {
@@ -87,15 +88,15 @@ public class BookOwnerModel {
         }
     }
 
-    public List<BookUtility> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public BookUtility getSelectedBook() {
+    public Book getSelectedBook() {
         return selectedBook;
     }
 
-    public void setSelectedBook(BookUtility book) {
+    public void setSelectedBook(Book book) {
         this.selectedBook = book;
     }
 }
