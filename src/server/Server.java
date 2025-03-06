@@ -22,7 +22,8 @@ public class Server {
 
     public static void main(String[] args) {
         ServerXml.loadUsers();
-        System.out.println("[SERVER] Server is running on port " + PORT + "...");try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+        System.out.println("[SERVER] Server is running on port " + PORT + "...");
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("[SERVER] New client connected: " + clientSocket.getInetAddress());
@@ -161,22 +162,22 @@ public class Server {
                                     boolean isLoggedOut = handleUserLogout(logoutUser);
                                     output.writeObject(isLoggedOut ? "SUCCESS" : "ERROR");
                                     if (isLoggedOut) {
-                                        System.out.println("[Server] Client logged out: " + logoutUser.getUsername() + "is successfully logged out");
+                                        System.out.println("[SERVER] Client logged out: " + logoutUser.getUsername() + "is successfully logged out");
                                     } else {
-                                        System.out.println("[Server] Client: " + logoutUser.getUsername() + "isn't logged out");
+                                        System.out.println("[SERVER] Client: " + logoutUser.getUsername() + "isn't logged out");
                                     }
                                 } catch (Exception e) {
-                                    System.err.println("[Server] Error handling logout.xml: " + e.getMessage());
+                                    System.err.println("[SERVER] Error handling logout.xml: " + e.getMessage());
                                 } finally {
                                     try {
                                         clientSocket.close(); // Close socket after logout.xml
                                     } catch (IOException e) {
-                                        System.err.println("[Server] Error closing client socket: " + e.getMessage());
+                                        System.err.println("[SERVER] Error closing client socket: " + e.getMessage());
                                     }
                                 }
                                 return; // Exit the loop and end the thread
                             default:
-                                System.out.println("[Server] Unknown command received: " + command);
+                                System.out.println("[SERVER] Unknown command received: " + command);
                         }
                     } catch (EOFException e) {
                         break; // Exit loop when client disconnects
@@ -185,13 +186,13 @@ public class Server {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("[Server] Client error: " + clientSocket.getInetAddress());
+                System.out.println("[SERVER] Client error: " + clientSocket.getInetAddress());
                 e.printStackTrace(); // Print detailed error for debugging
             } finally {
                 try {
                     clientSocket.close();
                 } catch (IOException e) {
-                    System.err.println("[SERVER] Error closing client socket: " + e.getMessage());
+                    System.err.println("[DEBUG] Error closing client socket: " + e.getMessage());
                 }
             }
         }
@@ -266,7 +267,7 @@ public class Server {
                 try {
                     activeUsers.get(user.getUsername()).close(); // Close the socket
                 } catch (IOException e) {
-                    System.err.println("[SERVER] Error closing socket for " + user.getUsername() + ": " + e.getMessage());
+                    System.err.println("[DEBUG] Error closing socket for " + user.getUsername() + ": " + e.getMessage());
                 }
                 activeUsers.remove(user.getUsername()); // Remove user from active list
                 System.out.println("[SERVER] User: " + user.getUsername() + " logged out successfully");
