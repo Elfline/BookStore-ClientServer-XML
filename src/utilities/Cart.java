@@ -1,6 +1,8 @@
 package utilities;
 
-public class Cart {
+import java.io.Serializable;
+
+public class Cart implements Serializable {
     private int quantity;
     private double price;
     private String title;

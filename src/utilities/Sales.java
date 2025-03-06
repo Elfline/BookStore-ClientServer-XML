@@ -1,6 +1,8 @@
 package utilities;
 
-public class Sales  {
+import java.io.Serializable;
+
+public class Sales implements Serializable {
     private String transactionId;
     private String bookTitle;
     private int quantity;

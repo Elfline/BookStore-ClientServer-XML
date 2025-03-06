@@ -1,7 +1,9 @@
 package utilities;
 
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
     private String username;
     private String date;
     private String transactionId;
