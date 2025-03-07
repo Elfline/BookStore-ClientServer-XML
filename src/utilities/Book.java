@@ -1,8 +1,7 @@
 package utilities;
 
-import java.io.Serializable;
 
-public class Book implements Serializable {
+public class Book {
     String title;
     String author;
     String genre;
